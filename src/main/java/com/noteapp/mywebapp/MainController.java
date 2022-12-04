@@ -25,10 +25,11 @@ public class MainController {
         return "login";
     }
 
-    @GetMapping("/register")
+    @GetMapping("/registerProf")
     public String showSignUpForm(Model model) {
+
         model.addAttribute("user", new UserDao());
-        return "register"; }
+        return "registerProf"; }
 
     @PostMapping("/process_register")
     public String processRegistration(UserDao user) {
@@ -49,4 +50,21 @@ public class MainController {
         return "/login";
     }
 
+    @GetMapping("/members")
+    public String ShowMembersPage(Model model) {
+        model.addAttribute("users", repo.findAll());
+        return "/members";
+    }
+
+    @PostMapping("/register")
+    public String showSignUpFormEleve(@RequestParam String role, Model model)
+    {
+        if (role.equals("prof")) {
+            model.addAttribute("user", new UserDao());
+            return "registerProf";
+        } else {
+            model.addAttribute("user", new UserDao());
+            return "registerEleve";
+        }
+    }
 }
