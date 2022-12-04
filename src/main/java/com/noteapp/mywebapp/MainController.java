@@ -32,7 +32,7 @@ public class MainController {
 
     @GetMapping("/members")
     public String ShowMembersPage(Model model) {
-        /*model.addAttribute("users", repoStudent.findAll());*/
+        model.addAttribute("users", repoStudent.findAll());
         return "/members";
     }
 
@@ -42,7 +42,7 @@ public class MainController {
         if (role.equals("prof")) {
             model.addAttribute("prof", new ProfDao());
             return "registerProf";
-        } else {
+        } else{
             model.addAttribute("user", new UserDao());
             return "registerEleve";
         }
@@ -53,10 +53,12 @@ public class MainController {
     @GetMapping("/registerProf")
     public String showSignUpForm(Model model) {
 
-        model.addAttribute("user", new UserDao());
+        model.addAttribute("user", new ProfDao());
         return "registerProf"; }
 
      */
+
+
 
     @PostMapping("/processRegisterStudent")
     public String processRegistrationStudent(UserDao user) {
@@ -86,4 +88,14 @@ public class MainController {
 
         return "/login";
     }
+
+    //***************** Connected *****************\\
+
+    @GetMapping("../index")
+    public String LogOut() { return "/index"; }
+
+    //***************** Notes *****************\\
+
+    @GetMapping("/notes/add_notes")
+    public String ShowAddNotes() { return "/notes/add_notes"; }
 }
