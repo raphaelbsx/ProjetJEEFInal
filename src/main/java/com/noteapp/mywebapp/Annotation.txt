@@ -1,0 +1,10 @@
+Creation de la bdd
+creation des classes objets user admin profs
+creation des interface ****repository, héritant de la classe CRUD Repository( ayant les méthodes associées au CRUD)
+mise en place avec hibernate de la creation des tables lors de l'éxécution du programme
+Template HTML -> adaptation a notre projet du template
+Creation du portail de connexion
+Test de vérif unit pour contrôler le bon fonctionnement du CRUD suivant une procedure de TDD
+(TEST DRIVEN DEVELOPMENT)
+éxécution des test sur la vrai base de donnée ( dans la memoire de la db par défaut)
+test add fonctionne ( remember unique : pdw, phone number, email )
