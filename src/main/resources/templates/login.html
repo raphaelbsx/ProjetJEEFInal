@@ -6,28 +6,37 @@
 </head>
 <body>
 
-<!-- Créer un form -->
-<form action="/loginsuccessful" method="post">
+<div>
+
     <div>
-        <label>E-mail</label>
+        <h1>Login to Grad School</h1>
+    </div>
+
+    <!-- Créer un form -->
+    <form action="/loginsuccessful" method="post">
         <div>
-            <input id="email" name="email" type="email" required/>
+            <label>E-mail</label>
+            <div>
+                <input id="email" name="email" type="email" required/>
+            </div>
         </div>
-    </div>
 
-    <div>
-        <label>Password</label>
         <div>
-            <input id="password" name="password" type="password" required/>
+            <label>Password</label>
+            <div>
+                <input id="password" name="password" type="password" required/>
+            </div>
         </div>
-    </div>
 
-    <div>
-        <button type="submit">Login</button>
-    </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
 
-    Si vous n'avez pas de compte cliquer ici
-    <a href="/register">Register</a>
-</form>
+        Si vous n'avez pas de compte cliquer ici
+        <a href="/members">Register</a>
+    </form>
+</div>
+
+
 </body>
 </html>
