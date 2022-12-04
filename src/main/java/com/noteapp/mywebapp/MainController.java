@@ -46,7 +46,7 @@ public class MainController {
                 return "/loginsuccessful";
             }
         }
-        return "/register";
+        return "/login";
     }
 
 
