@@ -98,4 +98,10 @@ public class MainController {
 
     @GetMapping("/notes/add_notes")
     public String ShowAddNotes() { return "/notes/add_notes"; }
+
+    @GetMapping("/notes/show_notes")
+    public String ShowShowNotes() { return "/notes/show_notes"; }
+
+    @GetMapping("/notes/teacher_notes")
+    public String ShowTeacherNotes() { return "/notes/teacher_notes"; }
 }
