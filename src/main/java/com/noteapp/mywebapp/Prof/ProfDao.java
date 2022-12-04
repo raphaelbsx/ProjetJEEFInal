@@ -24,6 +24,7 @@ public class ProfDao {
     @Column(length =15, nullable = false,unique = true)
 
     private int phoneNumber;
+    private int numeroProfesseur;
 
     @Column(length =45, nullable = false, name = "last_name")
     private String lastName;
@@ -35,6 +36,7 @@ public class ProfDao {
 
     @Column(length =45, nullable = false)
     private String matiere;
+
 
 
     public ProfDao(){
@@ -98,19 +100,30 @@ public class ProfDao {
         this.password = password;
     }
 
+
+
+    public int getNumeroProfesseur() {
+        return numeroProfesseur;
+    }
+
+    public void setNumeroProfesseur(int numeroProfesseur) {
+        this.numeroProfesseur = numeroProfesseur;
+    }
+
     @Override
     public String toString() {
         return "ProfDao{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
+                ", numeroProfesseur=" + numeroProfesseur +
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", matiere='" + matiere + '\'' +
                 '}';
     }
-/*
+    /*
     @OneToOne
     private SubjectDao subject;
 
