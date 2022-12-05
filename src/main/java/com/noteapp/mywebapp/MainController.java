@@ -13,6 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Controller
 public class MainController {
 
@@ -23,7 +26,7 @@ public class MainController {
     private ProfRepository repoTeacher;
 
     @Autowired
-    private NoteRepository note;
+    private NoteRepository repoNote;
 
     @GetMapping("/")
     public String ShowHomePage() {
@@ -106,7 +109,7 @@ public class MainController {
 
     @GetMapping("/add_notes")
     public String ShowAddNotes(Model model) {
-        model.addAttribute("note", new NoteDao());
+       model.addAttribute("note", new NoteDao());
         return "/notes/add_notes"; }
 
     @GetMapping("/show_notes")
@@ -117,7 +120,10 @@ public class MainController {
 
     @PostMapping("/save_notes")
     public String ShowSaveNotes(NoteDao newNote) {
-        note.save(newNote);
-        return "note_saved";
+        newNote.setTitle("test");
+        newNote.setContent("test");
+        newNote.setAddedDate(new Date() );
+        repoNote.save(newNote);
+        return "/loginsuccessful";
     }
 }
