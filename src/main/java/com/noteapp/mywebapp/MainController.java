@@ -1,5 +1,7 @@
 package com.noteapp.mywebapp;
 
+import com.noteapp.mywebapp.Note.NoteDao;
+import com.noteapp.mywebapp.Note.NoteRepository;
 import com.noteapp.mywebapp.Prof.ProfDao;
 import com.noteapp.mywebapp.Prof.ProfRepository;
 import com.noteapp.mywebapp.User.UserDao;
@@ -19,6 +21,9 @@ public class MainController {
 
     @Autowired
     private ProfRepository repoTeacher;
+
+    @Autowired
+    private NoteRepository note;
 
     @GetMapping("/")
     public String ShowHomePage() {
@@ -96,12 +101,23 @@ public class MainController {
 
     //***************** Notes *****************\\
 
-    @GetMapping("/notes/add_notes")
-    public String ShowAddNotes() { return "/notes/add_notes"; }
+    @GetMapping("/home")
+    public String BackToHome() { return "/loginsuccessful"; }
 
-    @GetMapping("/notes/show_notes")
+    @GetMapping("/add_notes")
+    public String ShowAddNotes(Model model) {
+        model.addAttribute("note", new NoteDao());
+        return "/notes/add_notes"; }
+
+    @GetMapping("/show_notes")
     public String ShowShowNotes() { return "/notes/show_notes"; }
 
-    @GetMapping("/notes/teacher_notes")
+    @GetMapping("/teacher_notes")
     public String ShowTeacherNotes() { return "/notes/teacher_notes"; }
+
+    @PostMapping("/save_notes")
+    public String ShowSaveNotes(NoteDao newNote) {
+        note.save(newNote);
+        return "note_saved";
+    }
 }
