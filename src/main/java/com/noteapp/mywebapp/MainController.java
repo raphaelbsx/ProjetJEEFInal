@@ -120,8 +120,8 @@ public class MainController {
 
     @PostMapping("/save_notes")
     public String ShowSaveNotes(NoteDao newNote) {
-        newNote.setTitle("test");
-        newNote.setContent("test");
+        //newNote.setTitle("testa");
+        //newNote.setContent("test");
         newNote.setAddedDate(new Date() );
         repoNote.save(newNote);
         return "/loginsuccessful";

@@ -60,10 +60,10 @@
                 <form id="contact" action="/save_notes" method="post" th:object="${note}">
                     <div class="row">
                         <div class="col-md-12">
-                            <input name="name" type="text" class="form-control" id="name" placeholder="Note title" required="">
+                            <input name="name" type="text" class="form-control" id="name" th:field="*{title}" placeholder="Note title" required>
                         </div>
                         <div class="col-md-12">
-                            <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
+                            <textarea name="message" rows="6" class="form-control" id="message" th:field="*{content}" placeholder="Your message..." required></textarea>
                         </div>
                         <div class="col-md-12">
                             <fieldset>
