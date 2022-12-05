@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -112,8 +114,11 @@ public class MainController {
        model.addAttribute("note", new NoteDao());
         return "/notes/add_notes"; }
 
+
     @GetMapping("/show_notes")
-    public String ShowShowNotes() { return "/notes/show_notes"; }
+    public String ShowShowNotes() {
+        return "/notes/show_notes";
+    }
 
     @GetMapping("/teacher_notes")
     public String ShowTeacherNotes() { return "/notes/teacher_notes"; }
