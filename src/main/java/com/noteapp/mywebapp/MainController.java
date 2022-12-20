@@ -1,5 +1,7 @@
 package com.noteapp.mywebapp;
 
+import com.noteapp.mywebapp.Admin.AdminDao;
+import com.noteapp.mywebapp.Admin.AdminRepository;
 import com.noteapp.mywebapp.Note.NoteDao;
 import com.noteapp.mywebapp.Note.NoteRepository;
 import com.noteapp.mywebapp.Prof.ProfDao;
@@ -24,6 +26,8 @@ public class MainController {
     @Autowired
     private UserRepository repoStudent;
 
+    @Autowired
+    private AdminRepository repoAdmin;
     @Autowired
     private ProfRepository repoTeacher;
 
@@ -52,11 +56,16 @@ public class MainController {
         if (role.equals("prof")) {
             model.addAttribute("prof", new ProfDao());
             return "registerProf";
-        } else{
+        } else if (role.equals("eleve")) {
             model.addAttribute("user", new UserDao());
             return "registerEleve";
         }
+        else{
+        model.addAttribute("admin", new AdminDao());
+        return "registerAdmin";
+        }
     }
+
 
 
     /*
@@ -73,6 +82,12 @@ public class MainController {
     @PostMapping("/processRegisterStudent")
     public String processRegistrationStudent(UserDao user) {
         repoStudent.save(user);
+        return "register_success";
+    }
+
+    @PostMapping("/processRegisterAdmin")
+    public String processRegistrationAdmin(AdminDao admin) {
+        repoAdmin.save(admin);
         return "register_success";
     }
 
@@ -94,6 +109,26 @@ public class MainController {
                 return "/loginsuccessful";
             }
         }
+
+        AdminDao admin = repoAdmin.findByEmail(email);
+
+        if (admin != null) {
+            if (admin.getPassword().equals(password)) {
+                model.addAttribute("admin", admin);
+                return "/loginsuccessful";
+            }
+        }
+
+
+        ProfDao prof = repoTeacher.findByEmail(email);
+
+        if (prof != null) {
+            if (prof.getPassword().equals(password)) {
+                model.addAttribute("prof", prof);
+                return "/loginsuccessful";
+            }
+        }
+
 
 
         return "/login";

@@ -6,12 +6,13 @@
 </head>
 <body>
 
-Êtes-vous un professeur ou un élève?
+Êtes-vous un professeur, un élève, ou un admin?
 
 <form action="/register" method="post">
     <div>
         <input type="radio" name="role" value="prof" required>Prof</input>
         <input type= "radio" name="role" value="eleve" required>Eleve</input>
+        <input type= "radio" name="role" value="admin" required>Admin</input>
     </div>
     <div>
         <button type="submit">Submit</button>
