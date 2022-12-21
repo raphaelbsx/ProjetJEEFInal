@@ -40,8 +40,8 @@
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
             <li><a href="/home" class="external">Home</a></li>
-            <li><a href="/teacher_notes" class="external"e>Teacher Notes</a></li>
-            <li><a href="/#" class="external">Add Note</a></li>
+            <li><a href="/show_notesTeacher" class="external"e>Teacher Notes</a></li>
+            <li><a href="/add_notesTeacher" class="external">Add Note</a></li>
             <li><a href="/show_notes" class="external">Show Notes</a></li>
             <li><a href="/static" class="external">Log Out</a></li>
         </ul>
@@ -60,31 +60,31 @@
             <section>
                 <div th:each="note:${noteslist}" style="color:white;">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div>
                             <h1 th:text="${note.title}"></h1>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <p th:text="${note.addedDate}"></p>
+                        <div class="col-md-4">
+                            <strong th:text="${note.addedDate}"></strong>
                         </div>
-                        <div class="col-md-6">
-                            <p th:text="${note.matiere}"></p>
+                        <div class="col-md-4">
+                            <strong th:text="${note.matiere}"></strong>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <p th:text="${note.content}"></p>
+                        <!-- without endline -->
+                        <!--<p th:text="${note.content}"></p>-->
+                        <!-- with endline -->
+                        <p style="white-space: pre;" th:text="${note.content}"></p>
                     </div>
-                    <button class="left-content">Edit</button>
-                    <button class="right-content">Delete</button>
-                    <p> </p>
+                    <div class="container row">
+                        <a th:href="@{/updateNoteTeacher(noteId=${note.id})}" class="left-content ml-2">Edit</a>
+                        <a th:href="@{/deleteNoteTeacher(noteId=${note.id})}" class="right-content ml-2">Delete</a>
+                    </div>
                 </div>
             </section>
         </div>
-    </div>
-
-    <div class="container">
-        <button type="submit" action="" method="post" class="align-middle">Add Note</button>
     </div>
 </section>
 

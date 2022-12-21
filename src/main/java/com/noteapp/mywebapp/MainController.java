@@ -9,12 +9,10 @@ import com.noteapp.mywebapp.Prof.ProfRepository;
 import com.noteapp.mywebapp.User.UserDao;
 import com.noteapp.mywebapp.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
 
@@ -196,14 +194,15 @@ public class MainController {
         repoNote.deleteById(id);
         return "/Login/loginsuccessful";
     }
+    */
 
     // delete note for teacher
     @GetMapping("/deleteNoteTeacher")
-    public String deleteNoteTeacher(@RequestParam Long id) {
-        repoNote.deleteById(id);
+    public String deleteNoteTeacher(@RequestParam int noteId) {
+        repoNote.deleteById(noteId);
         return "/Login/loginsuccessfulTeacher";
     }
-
+    /*
     // delete note for admin
     @GetMapping("/deleteNoteAdmin")
     public String deleteNoteAdmin(@RequestParam Long id) {
@@ -218,15 +217,28 @@ public class MainController {
         model.addAttribute("note", note);
         return "/Login/loginsuccessful";
     }
+    */
 
     // update note for teacher
     @GetMapping("/updateNoteTeacher")
-    public String updateNoteTeacher(@RequestParam Long id, Model model) {
-        NoteDao note = repoNote.findById(id).get();
+    public String updateNoteTeacher(@RequestParam int noteId, Model model) {
+        NoteDao note = repoNote.findById(noteId).get();
         model.addAttribute("note", note);
-        return "/Login/loginsuccessfulTeacher";
+        return "/Teacher/add_notesTeacher";
     }
 
+    /*
+    // update note for teacher
+    @GetMapping("/updateNoteTeacher")
+    public ModelAndView editNoteTeacher(@RequestParam int noteId) {
+        ModelAndView mav = new ModelAndView("add_notesTeacher");
+        NoteDao note = repoNote.findById(noteId).get();
+        mav.addObject("note", note);
+        return mav;
+    }
+    */
+
+    /*
     // update note for admin
     @GetMapping("/updateNoteAdmin")
     public String updateNoteAdmin(@RequestParam Long id, Model model) {

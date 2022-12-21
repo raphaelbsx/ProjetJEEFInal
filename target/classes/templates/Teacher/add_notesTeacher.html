@@ -40,8 +40,8 @@
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
             <li><a href="/home" class="external">Home</a></li>
-            <li><a href="/teacher_notes" class="external"e>Teacher Notes</a></li>
-            <li><a href="/#" class="external">Add Note</a></li>
+            <li><a href="/show_notesTeacher" class="external"e>Teacher Notes</a></li>
+            <li><a href="/add_notesTeacher" class="external">Add Note</a></li>
             <li><a href="/show_notes" class="external">Show Notes</a></li>
             <li><a href="/static" class="external">Log Out</a></li>
         </ul>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <form id="contact" action="/saveNoteTeacher" method="post" th:object="${note}">
+                <form id="contact" th:action="@{/saveNoteTeacher}" method="post" th:object="${note}">
                     <div class="row">
                         <div class="col-md-6">
                             <input name="name" type="text" class="form-control" id="name" th:field="*{title}" placeholder="Note title" required>
@@ -71,6 +71,7 @@
                         <div class="col-md-12">
                             <fieldset>
                                 <button type="submit" id="form-submit" class="button">Add note</button>
+                                <input type="hidden" th:field="*{id}">
                             </fieldset>
                         </div>
                     </div>
