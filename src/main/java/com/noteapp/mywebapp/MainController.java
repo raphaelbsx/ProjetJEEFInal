@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -149,7 +150,7 @@ public class MainController {
 
     // save note for teacher
     @PostMapping("/saveNoteTeacher")
-    public String saveNoteTeacher(NoteDao note) {
+    public String saveNoteTeacher(@ModelAttribute NoteDao note) {
         note.setDate(new Date());
         repoNote.save(note);
         return "/Login/loginsuccessfulTeacher";
@@ -159,6 +160,7 @@ public class MainController {
     @PostMapping("/saveNoteAdmin")
     public String saveNoteAdmin(NoteDao note) {
         note.setDate(new Date());
+        note.setMatiere("MatiereTest");
         repoNote.save(note);
         return "/Login/loginsuccessfulAdmin";
     }
@@ -173,7 +175,7 @@ public class MainController {
     // Afficher les notes écrites par un teacher
     @GetMapping("/show_notesTeacher")
     public String showNotesTeacher(Model model) {
-        model.addAttribute("notes", repoNote.findAll());
+        model.addAttribute("noteslist", repoNote.findAll());
         return "/Teacher/show_notesTeacher";
     }
 

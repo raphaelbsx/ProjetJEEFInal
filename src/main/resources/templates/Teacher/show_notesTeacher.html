@@ -48,6 +48,47 @@
     </nav>
 </header>
 
+
+<section class="section why-us">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="section-heading">
+                <h2>Show notes</h2>
+            </div>
+        </div>
+        <div class="align-middle">
+            <section>
+                <div th:each="note:${noteslist}" style="color:white;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 th:text="${note.title}"></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p th:text="${note.addedDate}"></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p th:text="${note.matiere}"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p th:text="${note.content}"></p>
+                    </div>
+                    <button class="left-content">Edit</button>
+                    <button class="right-content">Delete</button>
+                    <p> </p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="container">
+        <button type="submit" action="" method="post" class="align-middle">Add Note</button>
+    </div>
+</section>
+
+<!--
 <section class="section contact">
     <div class="container">
         <div class="row">
@@ -56,10 +97,20 @@
                     <h2>Show notes</h2>
                 </div>
             </div>
-            <!-- show notes created by student related to subject or profesor -->
+            <div class="col-md-12" th:each="note:${noteslist}">
+                <div class="col-md-12">
+                    <p th:text="${note.title}"></p>
+                    <h3>hehe</h3>
+                    <p>blahblah</p>
+                </div>
+                <div class="col-md-12">
+                    <p th:text="${note.content}"></p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+-->
 
 <footer>
     <div class="container">

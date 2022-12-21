@@ -59,8 +59,11 @@
             <div class="col-md-12">
                 <form id="contact" action="/saveNoteTeacher" method="post" th:object="${note}">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <input name="name" type="text" class="form-control" id="name" th:field="*{title}" placeholder="Note title" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input name="name" type="text" class="form-control" th:field="*{matiere}" placeholder="Subject" required>
                         </div>
                         <div class="col-md-12">
                             <textarea name="message" rows="6" class="form-control" id="message" th:field="*{content}" placeholder="Your message..." required></textarea>
