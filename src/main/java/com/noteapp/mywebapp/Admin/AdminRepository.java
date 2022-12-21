@@ -9,4 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface AdminRepository extends CrudRepository<AdminDao, Integer> {
 
     AdminDao findByEmail(String email);
+
+    Object findByEmailAndPassword(String email, String password);
 }

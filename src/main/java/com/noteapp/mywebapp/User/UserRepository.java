@@ -14,4 +14,6 @@ import javax.security.auth.Subject;
 public interface UserRepository extends JpaRepository<UserDao, Integer> {
 
     UserDao findByEmail(String email);
+
+    Object findByEmailAndPassword(String email, String password);
 }

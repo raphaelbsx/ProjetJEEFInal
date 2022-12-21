@@ -41,9 +41,9 @@
         <ul class="main-menu">
             <li><a href="/home" class="external">Home</a></li>
             <li><a href="/teacher_notes" class="external"e>Teacher Notes</a></li>
-            <li><a href="/add_notes" class="external">Add Note</a></li>
+            <li><a href="/#" class="external">Add Note</a></li>
             <li><a href="/show_notes" class="external">Show Notes</a></li>
-            <li><a href="/" class="external">Log Out</a></li>
+            <li><a href="/static" class="external">Log Out</a></li>
         </ul>
     </nav>
 </header>
@@ -53,26 +53,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-heading">
-                    <h2>Add a Note</h2>
+                    <h2>Show notes</h2>
                 </div>
             </div>
-            <div class="col-md-12">
-                <form id="contact" action="/save_notes" method="post" th:object="${note}">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input name="name" type="text" class="form-control" id="name" th:field="*{title}" placeholder="Note title" required>
-                        </div>
-                        <div class="col-md-12">
-                            <textarea name="message" rows="6" class="form-control" id="message" th:field="*{content}" placeholder="Your message..." required></textarea>
-                        </div>
-                        <div class="col-md-12">
-                            <fieldset>
-                                <button type="submit" id="form-submit" class="button">Add note</button>
-                            </fieldset>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            <!-- show notes created by teacher-->
         </div>
     </div>
 </section>

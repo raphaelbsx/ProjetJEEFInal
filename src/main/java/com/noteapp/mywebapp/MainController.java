@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
@@ -41,13 +38,13 @@ public class MainController {
 
     @GetMapping("/login")
     public String ShowLoginPage() {
-        return "login";
+        return "/Login/login";
     }
 
     @GetMapping("/members")
     public String ShowMembersPage(Model model) {
         model.addAttribute("users", repoStudent.findAll());
-        return "/members";
+        return "/Register/members";
     }
 
     @PostMapping("/register")
@@ -55,14 +52,14 @@ public class MainController {
     {
         if (role.equals("prof")) {
             model.addAttribute("prof", new ProfDao());
-            return "registerProf";
+            return "/Register/registerProf";
         } else if (role.equals("eleve")) {
             model.addAttribute("user", new UserDao());
-            return "registerEleve";
+            return "/Register/registerEleve";
         }
         else{
         model.addAttribute("admin", new AdminDao());
-        return "registerAdmin";
+        return "/Register/registerAdmin";
         }
     }
 
@@ -82,59 +79,184 @@ public class MainController {
     @PostMapping("/processRegisterStudent")
     public String processRegistrationStudent(UserDao user) {
         repoStudent.save(user);
-        return "register_success";
+        return "/Register/register_success";
     }
 
     @PostMapping("/processRegisterAdmin")
     public String processRegistrationAdmin(AdminDao admin) {
         repoAdmin.save(admin);
-        return "register_success";
+        return "/Register/register_success";
     }
 
     @PostMapping("/processRegisterTeacher")
     public String processRegistrationTeacher(ProfDao prof) {
         repoTeacher.save(prof);
-        return "register_success";
+        return "/Register/register_success";
     }
 
 
-    @PostMapping("/loginsuccessful")
-    public String ShowLoginSuccessfulPage(@RequestParam String email, @RequestParam String password, Model model) {
-
-        UserDao user = repoStudent.findByEmail(email);
-
-        if (user != null) {
-            if (user.getPassword().equals(password)) {
-                model.addAttribute("user", user);
-                return "/loginsuccessful";
-            }
+    @PostMapping("/login")
+    public String processLogin(@RequestParam String email, @RequestParam String password, Model model) {
+        if (repoStudent.findByEmailAndPassword(email, password) != null) {
+            model.addAttribute("users", repoStudent.findAll());
+            return "/Login/loginsuccessful";
+        } else if (repoAdmin.findByEmailAndPassword(email, password) != null) {
+            model.addAttribute("users", repoAdmin.findAll());
+            return "/Login/loginsuccessfulAdmin";
+        } else if (repoTeacher.findByEmailAndPassword(email, password) != null) {
+            model.addAttribute("users", repoTeacher.findAll());
+            return "/Login/loginsuccessfulTeacher";
+        } else {
+            return "/Login/login";
         }
-
-        AdminDao admin = repoAdmin.findByEmail(email);
-
-        if (admin != null) {
-            if (admin.getPassword().equals(password)) {
-                model.addAttribute("admin", admin);
-                return "/loginsuccessful";
-            }
-        }
-
-
-        ProfDao prof = repoTeacher.findByEmail(email);
-
-        if (prof != null) {
-            if (prof.getPassword().equals(password)) {
-                model.addAttribute("prof", prof);
-                return "/loginsuccessful";
-            }
-        }
-
-
-
-        return "/login";
     }
 
+    // ajouter une note pour un prof
+    @GetMapping("/add_notesTeacher")
+    public String showAddNoteForm(Model model) {
+        model.addAttribute("note", new NoteDao());
+        return "/Teacher/add_notesTeacher";
+    }
+
+    @PostMapping("/processAddNoteTeacher")
+    public String processAddNoteTeacher(NoteDao note) {
+        note.setDate(new Date());
+        repoNote.save(note);
+        return "/Teacher/add_notesTeacher";
+    }
+
+
+    @GetMapping("/add_notesAdmin")
+    public String showAddNoteFormAdmin(Model model) {
+        model.addAttribute("note", new NoteDao());
+        return "/Admin/add_notesAdmin";
+    }
+
+    @GetMapping("/add_notesStudent")
+    public String showAddNoteFormStudent(Model model) {
+        model.addAttribute("note", new NoteDao());
+        return "/Student/add_notesStudent";
+    }
+
+    // save note for student
+    @PostMapping("/saveNoteStudent")
+    public String saveNoteStudent(NoteDao note) {
+        note.setDate(new Date());
+        repoNote.save(note);
+        return "/Login/loginsuccessful";
+    }
+
+
+    // save note for teacher
+    @PostMapping("/saveNoteTeacher")
+    public String saveNoteTeacher(NoteDao note) {
+        note.setDate(new Date());
+        repoNote.save(note);
+        return "/Login/loginsuccessfulTeacher";
+    }
+
+    // save note for admin
+    @PostMapping("/saveNoteAdmin")
+    public String saveNoteAdmin(NoteDao note) {
+        note.setDate(new Date());
+        repoNote.save(note);
+        return "/Login/loginsuccessfulAdmin";
+    }
+
+    // show notes for student
+    @GetMapping("/show_notesStudent")
+    public String showNotesStudent(Model model) {
+        model.addAttribute("notes", repoNote.findAll());
+        return "/Login/loginsuccessful";
+    }
+
+    // Afficher les notes écrites par un teacher
+    @GetMapping("/show_notesTeacher")
+    public String showNotesTeacher(Model model) {
+        model.addAttribute("notes", repoNote.findAll());
+        return "/Teacher/show_notesTeacher";
+    }
+
+    // show notes for admin
+    @GetMapping("/show_notesAdmin")
+    public String showNotesAdmin(Model model) {
+        model.addAttribute("notes", repoNote.findAll());
+        return "/Login/loginsuccessfulAdmin";
+    }
+    /*
+    // delete note for student
+    @GetMapping("/deleteNoteStudent")
+    public String deleteNoteStudent(@RequestParam Long id) {
+        repoNote.deleteById(id);
+        return "/Login/loginsuccessful";
+    }
+
+    // delete note for teacher
+    @GetMapping("/deleteNoteTeacher")
+    public String deleteNoteTeacher(@RequestParam Long id) {
+        repoNote.deleteById(id);
+        return "/Login/loginsuccessfulTeacher";
+    }
+
+    // delete note for admin
+    @GetMapping("/deleteNoteAdmin")
+    public String deleteNoteAdmin(@RequestParam Long id) {
+        repoNote.deleteById(id);
+        return "/Login/loginsuccessfulAdmin";
+    }
+
+    // update note for student
+    @GetMapping("/updateNoteStudent")
+    public String updateNoteStudent(@RequestParam Long id, Model model) {
+        NoteDao note = repoNote.findById(id).get();
+        model.addAttribute("note", note);
+        return "/Login/loginsuccessful";
+    }
+
+    // update note for teacher
+    @GetMapping("/updateNoteTeacher")
+    public String updateNoteTeacher(@RequestParam Long id, Model model) {
+        NoteDao note = repoNote.findById(id).get();
+        model.addAttribute("note", note);
+        return "/Login/loginsuccessfulTeacher";
+    }
+
+    // update note for admin
+    @GetMapping("/updateNoteAdmin")
+    public String updateNoteAdmin(@RequestParam Long id, Model model) {
+        NoteDao note = repoNote.findById(id).get();
+        model.addAttribute("note", note);
+        return "/Login/loginsuccessfulAdmin";
+    }
+
+    // save updated note for student
+    @PostMapping("/saveUpdatedNoteStudent")
+    public String saveUpdatedNoteStudent(NoteDao note) {
+        note.setDate(new Date());
+        repoNote.save(note);
+        return "/Login/loginsuccessful";
+    }
+
+    // save updated note for teacher
+    @PostMapping("/saveUpdatedNoteTeacher")
+    public String saveUpdatedNoteTeacher(NoteDao note) {
+        note.setDate(new Date());
+        repoNote.save(note);
+        return "/Login/loginsuccessfulTeacher";
+    }
+
+    // save updated note for admin
+    @PostMapping("/saveUpdatedNoteAdmin")
+    public String saveUpdatedNoteAdmin(NoteDao note) {
+        note.setDate(new Date());
+        repoNote.save(note);
+        return "/Login/loginsuccessfulAdmin";
+    }
+
+*/
     //***************** Connected *****************\\
+
+    /*
 
     @GetMapping("../index")
     public String LogOut() { return "/index"; }
@@ -163,5 +285,5 @@ public class MainController {
         newNote.setAddedDate(new Date() );
         repoNote.save(newNote);
         return "/loginsuccessful";
-    }
+    }*/
 }

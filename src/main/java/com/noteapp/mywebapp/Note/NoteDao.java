@@ -66,4 +66,8 @@ public class NoteDao {
     public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
     }
+
+    public void setDate(Date date) {
+        this.addedDate = date;
+    }
 }

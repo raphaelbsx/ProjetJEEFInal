@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface ProfRepository extends CrudRepository<ProfDao, Integer> {
 
     ProfDao findByEmail(String email);
+
+    Object findByEmailAndPassword(String email, String password);
 }
