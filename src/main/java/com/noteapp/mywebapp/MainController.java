@@ -110,6 +110,11 @@ public class MainController {
         }
     }
 
+    @GetMapping("/home_teacher")
+    public String homeTeacher() {
+        return "/Login/loginsuccessfulTeacher";
+    }
+
     // ajouter une note pour un prof
     @GetMapping("/add_notesTeacher")
     public String showAddNoteForm(Model model) {
@@ -226,17 +231,6 @@ public class MainController {
         model.addAttribute("note", note);
         return "/Teacher/add_notesTeacher";
     }
-
-    /*
-    // update note for teacher
-    @GetMapping("/updateNoteTeacher")
-    public ModelAndView editNoteTeacher(@RequestParam int noteId) {
-        ModelAndView mav = new ModelAndView("add_notesTeacher");
-        NoteDao note = repoNote.findById(noteId).get();
-        mav.addObject("note", note);
-        return mav;
-    }
-    */
 
     /*
     // update note for admin
