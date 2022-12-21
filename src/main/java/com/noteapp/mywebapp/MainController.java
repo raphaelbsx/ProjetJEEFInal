@@ -8,12 +8,15 @@ import com.noteapp.mywebapp.Prof.ProfDao;
 import com.noteapp.mywebapp.Prof.ProfRepository;
 import com.noteapp.mywebapp.User.UserDao;
 import com.noteapp.mywebapp.User.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpServletRequest;
+
 
 import java.util.Date;
 
@@ -91,29 +94,58 @@ public class MainController {
     @PostMapping("/processRegisterTeacher")
     public String processRegistrationTeacher(ProfDao prof) {
         repoTeacher.save(prof);
+
         return "/Register/register_success";
     }
 
 
     @PostMapping("/login")
-    public String processLogin(@RequestParam String email, @RequestParam String password, Model model) {
+    public String processLogin(@RequestParam String email, @RequestParam String password, Model model, HttpServletRequest request ) {
         if (repoStudent.findByEmailAndPassword(email, password) != null) {
             model.addAttribute("users", repoStudent.findAll());
+            HttpSession session = request.getSession();
+            // session.invalidate();
+            // HttpSession session2 = request.getSession();
+            // session2.setAttribute( "mail", email );
+            session.setAttribute( "mail", email );
             return "/Login/loginsuccessful";
         } else if (repoAdmin.findByEmailAndPassword(email, password) != null) {
             model.addAttribute("users", repoAdmin.findAll());
+            HttpSession session = request.getSession();
+            // session.invalidate();
+            // HttpSession session2 = request.getSession();
+            // session2.setAttribute( "mail", email );
+            session.setAttribute( "mail", email );
             return "/Login/loginsuccessfulAdmin";
+
         } else if (repoTeacher.findByEmailAndPassword(email, password) != null) {
             model.addAttribute("users", repoTeacher.findAll());
+            HttpSession session = request.getSession();
+            // session.invalidate();
+            // HttpSession session2 = request.getSession();
+            // session2.setAttribute( "mail", email );
+            session.setAttribute( "mail", email );
             return "/Login/loginsuccessfulTeacher";
         } else {
             return "/Login/login";
         }
     }
 
+    @GetMapping("/static")
+    public String ShowLogOut(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        if (session.getAttribute("mail") != "") {
+            // return "/Login/login";
+            return "/index";
+        } else {
+            return "/Login/login";
+        }
+    }
+
+
     // ajouter une note pour un prof
     @GetMapping("/add_notesTeacher")
-    public String showAddNoteForm(Model model) {
+    public String showAddNoteForm(Model model, HttpServletRequest request) {
         model.addAttribute("note", new NoteDao());
         return "/Teacher/add_notesTeacher";
     }

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900"
+          rel="stylesheet">
 
     <title>Grad School Manage Users</title>
 
@@ -19,13 +20,7 @@
     <link rel="stylesheet" href="../assets/css/templatemo-grad-school.css">
     <link rel="stylesheet" href="../assets/css/owl.css">
     <link rel="stylesheet" href="../assets/css/lightbox.css">
-    <!--
 
-    TemplateMo 557 Grad School
-
-    https://templatemo.com/tm-557-grad-school
-
-    -->
 </head>
 
 <body>
@@ -40,7 +35,7 @@
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
             <li><a href="/home" class="external">Home</a></li>
-            <li><a href="/manageUsers" class="external"e>Manage Users</a></li>
+            <li><a href="/manageUsers" class="external" e>Manage Users</a></li>
             <li><a href="/static" class="external">Log Out</a></li>
         </ul>
     </nav>
@@ -50,17 +45,101 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="section-heading">
-                    <h2>List of Users</h2>
+                <div class="section-heading"><h2>List of Users</h2></div>
+                <div>
+                    <table class ="table table-bordered ">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>PassWord</th>
+                            <th>Matiere</th>
+                            <th> MANAGE</th>
+                        </tr>
+
+
+                        </thead>
+                        <tbody bgcolor="white">
+                        <th:block th:each="user : ${userDaoList}">
+                            <tr>
+                                <td> [[${{(user.id)}}]]</td>
+                                <td> [[${{(user.email)}}]]</td>
+                                <td> [[${{(user.phoneNumber)}}]]</td>
+                                <td> [[${{(user.firstName)}}]]</td>
+                                <td> [[${{(user.lastName)}}]]</td>
+                                <td> [[${{(user.password)}}]]</td>
+                                <td> [[${{(user.matiere)}}]]</td>
+                                <td>
+                                    <a class="h4 mr-3" th:href="@{'/Admin/manageEdit' + ${user.id}}"> Edit </a>
+                                    <a class="h4" th:href="@{'/Admin/manageDelete' + ${user.id}}"> Delete </a>
+                                </td>
+
+                            </tr>
+
+                        </th:block>
+
+
+                        </tbody>
+
+                    </table>
+
                 </div>
             </div>
             <div class="col-md-12">
-                <table class="table"
             </div>
         </div>
     </div>
 </section>
 
+<section class="section why-us" data-section="section2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading"><h2>List of Professors</h2></div>
+                <div>
+                    <table class ="table table-bordered ">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>PassWord</th>
+                            <th>Matiere</th>
+                        </tr>
+
+                        </thead>
+                        <tbody bgcolor="white">
+                        <th:block th:each="prof : ${profDaoList}">
+                            <tr>
+                                <td> [[${{(prof.id)}}]]</td>
+                                <td> [[${{(prof.email)}}]]</td>
+                                <td> [[${{(prof.phoneNumber)}}]]</td>
+                                <td> [[${{(prof.firstName)}}]]</td>
+                                <td> [[${{(prof.lastName)}}]]</td>
+                                <td> [[${{(prof.password)}}]]</td>
+                                <td> [[${{(prof.matiere)}}]]</td>
+
+                            </tr>
+
+                        </th:block>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+            </div>
+        </div>
+    </div>
+</section>
 <footer>
     <div class="container">
         <div class="row">
@@ -72,7 +151,6 @@
         </div>
     </div>
 </footer>
-
 
 
 </section>
@@ -101,7 +179,8 @@
 
         if (isAnimate) {
             $('body, html').animate({
-                    scrollTop: reqSectionPos },
+                    scrollTop: reqSectionPos
+                },
                 800);
         } else {
             $('body, html').scrollTop(reqSectionPos);
@@ -120,14 +199,13 @@
                 var
                     currentId = $this.data('section'),
                     reqLink = $('a').filter('[href*=\\#' + currentId + ']');
-                reqLink.closest('li').addClass('active').
-                siblings().removeClass('active');
+                reqLink.closest('li').addClass('active').siblings().removeClass('active');
             }
         });
     };
 
     $('.main-menu, .scroll-to-section').on('click', 'a', function (e) {
-        if($(e.target).hasClass('external')) {
+        if ($(e.target).hasClass('external')) {
             return;
         }
         e.preventDefault();
