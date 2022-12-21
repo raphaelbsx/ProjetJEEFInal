@@ -118,12 +118,12 @@ public class MainController {
         return "/Teacher/add_notesTeacher";
     }
 
-    @PostMapping("/processAddNoteTeacher")
+    /*@PostMapping("/processAddNoteTeacher")
     public String processAddNoteTeacher(NoteDao note) {
         note.setDate(new Date());
         repoNote.save(note);
         return "/Teacher/add_notesTeacher";
-    }
+    }*/
 
 
     @GetMapping("/add_notesAdmin")
@@ -183,6 +183,10 @@ public class MainController {
         model.addAttribute("notes", repoNote.findAll());
         return "/Login/loginsuccessfulAdmin";
     }
+    @GetMapping("../index")
+    public String LogOut() { return "/index"; }
+
+
     /*
     // delete note for student
     @GetMapping("/deleteNoteStudent")

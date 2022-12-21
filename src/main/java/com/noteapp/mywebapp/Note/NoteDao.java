@@ -2,7 +2,6 @@ package com.noteapp.mywebapp.Note;
 
 import jakarta.persistence.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
@@ -23,12 +22,17 @@ public class NoteDao {
 
     private Date addedDate;
 
+    @Column(nullable = false, unique = true, length = 45)
+    private String matiere;
+
+
     public NoteDao(String title, String content, Date addedDate) {
         super();
-        this.id = new Random().nextInt(100000);
-        this.title = title;
-        this.content = content;
-        this.addedDate = addedDate;
+        this.setId(new Random().nextInt(100000));
+        this.setTitle(title);
+        this.setContent(content);
+        this.setAddedDate(addedDate);
+        this.setMatiere(getMatiere());
     }
 
     public NoteDao() {
@@ -68,6 +72,14 @@ public class NoteDao {
     }
 
     public void setDate(Date date) {
-        this.addedDate = date;
+        this.setAddedDate(date);
+    }
+
+    public String getMatiere() {
+        return matiere;
+    }
+
+    public void setMatiere(String matiere) {
+        this.matiere = matiere;
     }
 }
