@@ -78,7 +78,60 @@ public class MainController {
      */
 
 
+    @PostMapping("/processRegisterStudent")
+    public String processRegistrationStudent(@RequestParam String email, Model model, UserDao user) {
+        if (repoStudent.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else if (repoAdmin.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else if (repoTeacher.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else {
+            repoStudent.save(user);
+            return "/Register/register_success";
+        }
+    }
 
+    @PostMapping("/processRegisterAdmin")
+    public String processRegistrationAdmin(@RequestParam String email, Model model, AdminDao admin) {
+        if (repoStudent.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else if (repoAdmin.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else if (repoTeacher.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else {
+            repoAdmin.save(admin);
+            return "/Register/register_success";
+        }
+    }
+
+    @PostMapping("/processRegisterTeacher")
+    public String processRegistrationTeacher(@RequestParam String email, Model model, ProfDao prof) {
+        if (repoStudent.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else if (repoAdmin.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else if (repoTeacher.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else {
+            repoTeacher.save(prof);
+            return "/Register/register_success";
+        }
+    }
+
+    /*public String accountExistAlready()*/
+
+    /*
     @PostMapping("/processRegisterStudent")
     public String processRegistrationStudent(UserDao user) {
         repoStudent.save(user);
@@ -92,11 +145,34 @@ public class MainController {
     }
 
     @PostMapping("/processRegisterTeacher")
-    public String processRegistrationTeacher(ProfDao prof) {
-        repoTeacher.save(prof);
-
-        return "/Register/register_success";
+    public String processRegistrationTeacher(@RequestParam String email, ProfDao prof) {
+        if (repoStudent.findByEmail(email) != null) {
+            return "/index";
+        } else {
+            repoTeacher.save(prof);
+            return "/Register/register_success";
+        }
     }
+    */
+
+
+    /*
+    @GetMapping("/checkEmail")
+    public String checkEmail(@RequestParam String email, Model model) {
+        if (repoStudent.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else if (repoAdmin.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else if (repoTeacher.findByEmail(email) != null) {
+            model.addAttribute("email", email);
+            return "/Register/emailAlreadyExists";
+        } else {
+            return "/Register/emailDoesNotExist";
+        }
+    }
+    */
 
 
     @PostMapping("/login")
@@ -142,6 +218,12 @@ public class MainController {
         }
     }
 
+    // Back to logged page for the teacher
+    @GetMapping("/home_teacher")
+    public String homeTeacher() {
+        return "/Login/loginsuccessfulTeacher";
+    }
+
 
     // ajouter une note pour un prof
     @GetMapping("/add_notesTeacher")
@@ -150,12 +232,14 @@ public class MainController {
         return "/Teacher/add_notesTeacher";
     }
 
+    /*
     @PostMapping("/processAddNoteTeacher")
     public String processAddNoteTeacher(NoteDao note) {
         note.setDate(new Date());
         repoNote.save(note);
         return "/Teacher/add_notesTeacher";
     }
+    */
 
 
     @GetMapping("/add_notesAdmin")
@@ -205,7 +289,7 @@ public class MainController {
     // Afficher les notes écrites par un teacher
     @GetMapping("/show_notesTeacher")
     public String showNotesTeacher(Model model) {
-        model.addAttribute("notes", repoNote.findAll());
+        model.addAttribute("noteslist", repoNote.findAll());
         return "/Teacher/show_notesTeacher";
     }
 
@@ -222,14 +306,15 @@ public class MainController {
         repoNote.deleteById(id);
         return "/Login/loginsuccessful";
     }
+    */
 
     // delete note for teacher
     @GetMapping("/deleteNoteTeacher")
-    public String deleteNoteTeacher(@RequestParam Long id) {
-        repoNote.deleteById(id);
+    public String deleteNoteTeacher(@RequestParam int noteId) {
+        repoNote.deleteById(noteId);
         return "/Login/loginsuccessfulTeacher";
     }
-
+    /*
     // delete note for admin
     @GetMapping("/deleteNoteAdmin")
     public String deleteNoteAdmin(@RequestParam Long id) {
@@ -244,15 +329,17 @@ public class MainController {
         model.addAttribute("note", note);
         return "/Login/loginsuccessful";
     }
+    */
 
     // update note for teacher
     @GetMapping("/updateNoteTeacher")
-    public String updateNoteTeacher(@RequestParam Long id, Model model) {
-        NoteDao note = repoNote.findById(id).get();
+    public String updateNoteTeacher(@RequestParam int noteId, Model model) {
+        NoteDao note = repoNote.findById(noteId).get();
         model.addAttribute("note", note);
-        return "/Login/loginsuccessfulTeacher";
+        return "/Teacher/add_notesTeacher";
     }
 
+    /*
     // update note for admin
     @GetMapping("/updateNoteAdmin")
     public String updateNoteAdmin(@RequestParam Long id, Model model) {
