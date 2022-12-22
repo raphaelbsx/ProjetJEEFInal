@@ -2,6 +2,8 @@ package com.noteapp.mywebapp;
 
 import com.noteapp.mywebapp.Admin.AdminDao;
 import com.noteapp.mywebapp.Admin.AdminRepository;
+import com.noteapp.mywebapp.Admin.AdminService;
+import com.noteapp.mywebapp.Admin.AdminController;
 import com.noteapp.mywebapp.Note.NoteDao;
 import com.noteapp.mywebapp.Note.NoteRepository;
 import com.noteapp.mywebapp.Prof.ProfDao;
@@ -24,6 +26,8 @@ import java.util.List;
 
 @Controller
 public class MainController {
+    @Autowired
+    private AdminService service;
 
     @Autowired
     private UserRepository repoStudent;
@@ -53,18 +57,16 @@ public class MainController {
     }
 
     @PostMapping("/register")
-    public String showSignUpFormEleve(@RequestParam String role, Model model)
-    {
+    public String showSignUpFormEleve(@RequestParam String role, Model model) {
         if (role.equals("prof")) {
             model.addAttribute("prof", new ProfDao());
             return "/Register/registerProf";
         } else if (role.equals("eleve")) {
             model.addAttribute("user", new UserDao());
             return "/Register/registerEleve";
-        }
-        else{
-        model.addAttribute("admin", new AdminDao());
-        return "/Register/registerAdmin";
+        } else {
+            model.addAttribute("admin", new AdminDao());
+            return "/Register/registerAdmin";
         }
     }
 
@@ -159,23 +161,30 @@ public class MainController {
 
 
     @PostMapping("/login")
-    public String processLogin(@RequestParam String email, @RequestParam String password, Model model, HttpServletRequest request ) {
+    public String processLogin(@RequestParam String email, @RequestParam String password, Model model, HttpServletRequest request) {
         if (repoStudent.findByEmailAndPassword(email, password) != null) {
             model.addAttribute("users", repoStudent.findAll());
             HttpSession session = request.getSession();
             // session.invalidate();
             // HttpSession session2 = request.getSession();
             // session2.setAttribute( "mail", email );
-            session.setAttribute( "mail", email );
+            session.setAttribute("mail", email);
             return "/Login/loginsuccessful";
-        } else if (repoAdmin.findByEmailAndPassword(email, password) != null) {
+        }
+
+        else if (repoAdmin.findByEmailAndPassword(email, password) != null) {
             model.addAttribute("users", repoAdmin.findAll());
             HttpSession session = request.getSession();
-            // session.invalidate();
-            // HttpSession session2 = request.getSession();
-            // session2.setAttribute( "mail", email );
-            session.setAttribute( "mail", email );
-            return "/Login/loginsuccessfulAdmin";
+            session.setAttribute("mail", email);
+            if (session.getAttribute("mail") != "") {
+                List<UserDao> userDaoList = service.listAll();
+                List<ProfDao> profDaoList = service.listAllProf();
+                model.addAttribute("userDaoList", userDaoList);
+                model.addAttribute("profDaoList", profDaoList);
+                return "/Admin/manageUsers";
+            }
+            return "/Login/login";
+
 
         } else if (repoTeacher.findByEmailAndPassword(email, password) != null) {
             model.addAttribute("users", repoTeacher.findAll());
@@ -183,7 +192,7 @@ public class MainController {
             // session.invalidate();
             // HttpSession session2 = request.getSession();
             // session2.setAttribute( "mail", email );
-            session.setAttribute( "mail", email );
+            session.setAttribute("mail", email);
             return "/Login/loginsuccessfulTeacher";
         } else {
             return "/Login/login";
