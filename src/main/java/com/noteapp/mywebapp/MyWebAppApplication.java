@@ -8,7 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MyWebAppApplication implements CommandLineRunner {
+public class MyWebAppApplication {
 
     @Autowired
     private static UserRepository repoUser;
@@ -18,6 +18,7 @@ public class MyWebAppApplication implements CommandLineRunner {
         SpringApplication.run(MyWebAppApplication.class, args);
     }
 
+    /*
     @Override
     public void run(String... args) {
         UserDao user1 = new UserDao();
@@ -30,6 +31,7 @@ public class MyWebAppApplication implements CommandLineRunner {
 
         repoUser.save(user1);
     }
+     */
 
 
         /*

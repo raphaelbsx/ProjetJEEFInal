@@ -63,6 +63,7 @@ public class MainController {
             return "/Register/registerProf";
         } else if (role.equals("eleve")) {
             model.addAttribute("user", new UserDao());
+            // model.addAttribute("matierelist", repoTeacher.fin)
             return "/Register/registerEleve";
         } else {
             model.addAttribute("admin", new AdminDao());
@@ -164,10 +165,12 @@ public class MainController {
     public String processLogin(@RequestParam String email, @RequestParam String password, Model model, HttpServletRequest request) {
         if (repoStudent.findByEmailAndPassword(email, password) != null) {
             model.addAttribute("users", repoStudent.findAll());
+            UserDao user = repoStudent.findByEmail(email);
             HttpSession session = request.getSession();
             // session.invalidate();
             // HttpSession session2 = request.getSession();
             // session2.setAttribute( "mail", email );
+            session.setAttribute("matiere", user.getMatiere());
             session.setAttribute("mail", email);
             return "/Login/loginsuccessful";
         }
@@ -188,10 +191,12 @@ public class MainController {
 
         } else if (repoTeacher.findByEmailAndPassword(email, password) != null) {
             model.addAttribute("users", repoTeacher.findAll());
+            ProfDao prof = repoTeacher.findByEmail(email);
             HttpSession session = request.getSession();
             // session.invalidate();
             // HttpSession session2 = request.getSession();
             // session2.setAttribute( "mail", email );
+            session.setAttribute("matiere", prof.getMatiere());
             session.setAttribute("mail", email);
             return "/Login/loginsuccessfulTeacher";
         } else {
@@ -387,7 +392,7 @@ public class MainController {
         if (session.getAttribute("mail") != "") {
             model.addAttribute("notesUserSubject", repoNote.findByEmailAndRefnote((String) session.getAttribute("mail"), 3));
 
-            model.addAttribute("notesTeacherSubject", repoNote.findByMatiereAndRefnote("prof", 1));
+            model.addAttribute("notesTeacherSubject", repoNote.findByMatiereAndRefnote((String) session.getAttribute("matiere"), 1));
             return "/User/subject_notesUser";
         }
         return "/";
@@ -400,7 +405,7 @@ public class MainController {
         if (session.getAttribute("mail") != "") {
             model.addAttribute("notesProfSubject", repoNote.findByEmailAndRefnote((String) session.getAttribute("mail"), 1));
 
-            model.addAttribute("notesStudentSubject", repoNote.findByMatiereAndRefnote("user", 3));
+            model.addAttribute("notesStudentSubject", repoNote.findByMatiereAndRefnote((String) session.getAttribute("matiere"), 3));
             return "/Teacher/subject_notesTeacher";
         }
         return "/";
