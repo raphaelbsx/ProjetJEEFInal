@@ -19,7 +19,13 @@
     <link rel="stylesheet" href="assets/css/templatemo-grad-school.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
+    <!--
 
+    TemplateMo 557 Grad School
+
+    https://templatemo.com/tm-557-grad-school
+
+    -->
 </head>
 
 <body>
@@ -33,9 +39,9 @@
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
-            <li><a href="/home" class="external">Home</a></li>
-            <li><a href="/teacher_notes" class="external"e>Teacher Notes</a></li>
-            <li><a href="/#" class="external">Add Note</a></li>
+            <li><a href="/home_teacher" class="external">Home</a></li>
+            <li><a href="/show_notesTeacher" class="external"e>Teacher Notes</a></li>
+            <li><a href="/add_notesTeacher" class="external">Add Note</a></li>
             <li><a href="/show_notes" class="external">Show Notes</a></li>
             <li><a href="/static" class="external">Log Out</a></li>
         </ul>
@@ -51,10 +57,13 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <form id="contact" action="/saveNoteTeacher" method="post" th:object="${note}">
+                <form id="contact" th:action="@{/saveNoteTeacher}" method="post" th:object="${note}">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <input name="name" type="text" class="form-control" id="name" th:field="*{title}" placeholder="Note title" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input name="name" type="text" class="form-control" th:field="*{matiere}" placeholder="Subject" required>
                         </div>
                         <div class="col-md-12">
                             <textarea name="message" rows="6" class="form-control" id="message" th:field="*{content}" placeholder="Your message..." required></textarea>
@@ -62,6 +71,7 @@
                         <div class="col-md-12">
                             <fieldset>
                                 <button type="submit" id="form-submit" class="button">Add note</button>
+                                <input type="hidden" th:field="*{id}">
                             </fieldset>
                         </div>
                     </div>

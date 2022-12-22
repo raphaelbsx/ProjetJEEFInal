@@ -19,7 +19,13 @@
     <link rel="stylesheet" href="assets/css/templatemo-grad-school.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
+    <!--
 
+    TemplateMo 557 Grad School
+
+    https://templatemo.com/tm-557-grad-school
+
+    -->
 </head>
 
 <body>
@@ -33,15 +39,56 @@
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
-            <li><a href="/home" class="external">Home</a></li>
-            <li><a href="/teacher_notes" class="external"e>Teacher Notes</a></li>
-            <li><a href="/#" class="external">Add Note</a></li>
-            <li><a href="/show_notes" class="external">Show Notes</a></li>
+            <li><a href="/home_teacher" class="external">Home</a></li>
+            <li><a href="/show_notesTeacher" class="external"e>Teacher Notes</a></li>
+            <li><a href="/add_notesTeacher" class="external">Add Note</a></li>
+            <li><a href="/show_notesStudentTeacher" class="external">Show Notes</a></li>
             <li><a href="/static" class="external">Log Out</a></li>
         </ul>
     </nav>
 </header>
 
+
+<section class="section why-us">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="section-heading">
+                <h2>Show notes</h2>
+            </div>
+        </div>
+        <div class="align-middle">
+            <section>
+                <div th:each="note:${noteslist}" style="color:white;">
+                    <div class="row">
+                        <div>
+                            <h1 th:text="${note.title}"></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <strong th:text="${note.addedDate}"></strong>
+                        </div>
+                        <div class="col-md-4">
+                            <strong th:text="${note.matiere}"></strong>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <!-- without endline -->
+                        <!--<p th:text="${note.content}"></p>-->
+                        <!-- with endline -->
+                        <p style="white-space: pre;" th:text="${note.content}"></p>
+                    </div>
+                    <div class="container row">
+                        <a th:href="@{/updateNoteTeacher(noteId=${note.id})}" class="left-content ml-2">Edit</a>
+                        <a th:href="@{/deleteNoteTeacher(noteId=${note.id})}" class="right-content ml-2">Delete</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+<!--
 <section class="section contact">
     <div class="container">
         <div class="row">
@@ -50,10 +97,20 @@
                     <h2>Show notes</h2>
                 </div>
             </div>
-            <!-- show notes created by teacher-->
+            <div class="col-md-12" th:each="note:${noteslist}">
+                <div class="col-md-12">
+                    <p th:text="${note.title}"></p>
+                    <h3>hehe</h3>
+                    <p>blahblah</p>
+                </div>
+                <div class="col-md-12">
+                    <p th:text="${note.content}"></p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+-->
 
 <footer>
     <div class="container">
