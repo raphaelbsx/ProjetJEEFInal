@@ -34,7 +34,6 @@
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
-            <li><a href="/home" class="external">Home</a></li>
             <li><a href="/manageUsers" class="external" e>Manage Users</a></li>
             <li><a href="/static" class="external">Log Out</a></li>
         </ul>
@@ -110,6 +109,8 @@
                             <th>Last Name</th>
                             <th>PassWord</th>
                             <th>Matiere</th>
+                            <th> MANAGE</th>
+
                         </tr>
 
                         </thead>
@@ -123,6 +124,10 @@
                                 <td> [[${{(prof.lastName)}}]]</td>
                                 <td> [[${{(prof.password)}}]]</td>
                                 <td> [[${{(prof.matiere)}}]]</td>
+                                <td>
+                                    <a class="h4 mr-3" th:href="@{'/Admin/manageEdit' + ${prof.id}}"> Edit </a>
+                                    <a class="h4" th:href="@{'/Admin/manageDelete' + ${prof.id}}"> Delete </a>
+                                </td>
 
                             </tr>
 
