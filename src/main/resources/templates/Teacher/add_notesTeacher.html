@@ -63,10 +63,10 @@
                             <input name="name" type="text" class="form-control" id="name" th:field="*{title}" placeholder="Note title" required>
                         </div>
                         <div class="col-md-4">
-                            <input name="name" type="text" class="form-control" th:field="*{matiere}" placeholder="Subject" required>
-                            <!--<input name="name" type="select" class="form-control">
-                                <option th:value="*{matiere}" th:field="*{matiere}"></option>
-                            </input>-->
+                            <!--<input name="name" type="text" class="form-control" th:field="*{matiere}" placeholder="Subject" required>-->
+                            <select th:field="*{matiere}">
+                                <option th:each="subject:${proflist}" th:value="${subject.matiere}" th:text="${subject.matiere}"></option>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <select th:field="*{refnote}">

@@ -213,6 +213,9 @@ public class MainController {
         NoteDao note = new NoteDao();
         note.setEmail((String) request.getSession().getAttribute("mail"));
         model.addAttribute("note", note);
+
+        ProfDao prof = repoTeacher.findByEmail(note.getEmail());
+        model.addAttribute("proflist", prof);
         return "/Teacher/add_notesTeacher";
     }
 
