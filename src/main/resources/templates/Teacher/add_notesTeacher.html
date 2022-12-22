@@ -64,11 +64,13 @@
                         </div>
                         <div class="col-md-4">
                             <!--<input name="name" type="text" class="form-control" th:field="*{matiere}" placeholder="Subject" required>-->
+                            <label style="color: white">Subject :</label>
                             <select th:field="*{matiere}">
                                 <option th:each="subject:${proflist}" th:value="${subject.matiere}" th:text="${subject.matiere}"></option>
                             </select>
                         </div>
                         <div class="col-md-4">
+                            <label style="color: white">Share the note :</label>
                             <select th:field="*{refnote}">
                                 <option value="0">Not to share</option>
                                 <option value="1">Share</option>

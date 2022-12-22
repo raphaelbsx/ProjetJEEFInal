@@ -39,10 +39,10 @@
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
-            <li><a href="/home_teacher" class="external">Home</a></li>
-            <li><a href="/show_notesTeacher" class="external"e>Teacher Notes</a></li>
-            <li><a href="/add_notesTeacher" class="external">Add Note</a></li>
-            <li><a href="/subject_notesTeacher" class="external">Subject Notes</a></li>
+            <li><a href="/home_user" class="external">Home</a></li>
+            <li><a href="/show_notesUser" class="external"e>User Notes</a></li>
+            <li><a href="/add_notesUser" class="external">Add Note</a></li>
+            <li><a href="/subject_notesUser" class="external">Subject Notes</a></li>
             <li><a href="/static" class="external">Log Out</a></li>
         </ul>
     </nav>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <form id="contact" th:action="@{/saveNoteTeacher}" method="post" th:object="${note}">
+                <form id="contact" th:action="@{/saveNoteUser}" method="post" th:object="${note}">
                     <div class="row">
                         <div class="col-md-4">
                             <input name="name" type="text" class="form-control" id="name" th:field="*{title}" placeholder="Note title" required>
@@ -66,14 +66,14 @@
                             <!--<input name="name" type="text" class="form-control" th:field="*{matiere}" placeholder="Subject" required>-->
                             <label style="color: white">Subject :</label>
                             <select th:field="*{matiere}">
-                                <option th:each="subject:${proflist}" th:value="${subject.matiere}" th:text="${subject.matiere}"></option>
+                                <option th:each="subject:${userlist}" th:value="${subject.matiere}" th:text="${subject.matiere}"></option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <label style="color: white">Share the note :</label>
                             <select th:field="*{refnote}">
-                                <option value="0">Not to share</option>
-                                <option value="1">Share</option>
+                                <option value="2">Not to share</option>
+                                <option value="3">Share</option>
                             </select>
                         </div>
                         <div class="col-md-12">

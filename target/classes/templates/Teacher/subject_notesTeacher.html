@@ -47,7 +47,7 @@
         </ul>
     </nav>
 </header>
-<!--
+
 <section class="section why-us">
     <div class="container">
         <div class="row">
@@ -67,14 +67,14 @@
                         </thead>
 
                         <tbody bgcolor="white">
-                        <th:block th:each="note : ${noteslistSubject}">
+                        <th:block th:each="noteProf : ${notesProfSubject}">
                             <tr>
-                                <td th:text="${note.title}"></td>
-                                <td th:text="${note.matiere}"></td>
-                                <td th:text="${note.addedDate}"></td>
-                                <td style="white-space: pre;" th:text="${note.content}"></td>
+                                <td th:text="${noteProf.title}"></td>
+                                <td th:text="${noteProf.matiere}"></td>
+                                <td th:text="${noteProf.addedDate}"></td>
+                                <td style="white-space: pre;" th:text="${noteProf.content}"></td>
                                 <td>
-                                    <a class="h4 mr-3" th:href="@{/updateNoteTeacher(noteId=${note.id})}">Unshare</a>
+                                    <a class="h4 mr-3" th:href="@{/updateNoteTeacher(noteId=${noteProf.id})}">Unshare</a>
                                 </td>
                             </tr>
                         </th:block>
@@ -88,6 +88,7 @@
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                         <tr>
+                            <th>Email</th>
                             <th>Title</th>
                             <th>Subject</th>
                             <th>Date</th>
@@ -97,14 +98,15 @@
                         </thead>
 
                         <tbody bgcolor="white">
-                        <th:block th:each="note : ${noteslistSubject}">
+                        <th:block th:each="noteStudent : ${notesStudentSubject}">
                             <tr>
-                                <td th:text="${note.title}"></td>
-                                <td th:text="${note.matiere}"></td>
-                                <td th:text="${note.addedDate}"></td>
-                                <td style="white-space: pre;" th:text="${note.content}"></td>
+                                <td th:text="${noteStudent.email}"></td>
+                                <td th:text="${noteStudent.title}"></td>
+                                <td th:text="${noteStudent.matiere}"></td>
+                                <td th:text="${noteStudent.addedDate}"></td>
+                                <td style="white-space: pre;" th:text="${noteStudent.content}"></td>
                                 <td>
-                                    <a class="h4 mr-3" th:href="@{/updateNoteTeacher(noteId=${note.id})}">Unshare</a>
+                                    <a class="h4 mr-3" th:href="@{/updateNoteTeacher(noteId=${noteStudent.id})}">Unshare</a>
                                 </td>
                             </tr>
                         </th:block>
@@ -115,7 +117,6 @@
         </div>
     </div>
 </section>
--->
 
 <footer>
     <div class="container">
