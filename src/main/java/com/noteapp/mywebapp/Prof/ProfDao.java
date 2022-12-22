@@ -124,22 +124,6 @@ public class ProfDao {
                 ", matiere='" + matiere + '\'' +
                 '}';
     }
-
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ProfDao profDao = (ProfDao) o;
-
-        if (id != profDao.id) return false;
-        if (phoneNumber != profDao.phoneNumber) return false;
-        if (numeroProfesseur != profDao.numeroProfesseur) return false;
-        if (!Objects.equals(email, profDao.email)) return false;
-        if (!Objects.equals(lastName, profDao.lastName)) return false;
-        if (!Objects.equals(password, profDao.password)) return false;
-        if (!Objects.equals(firstName, profDao.firstName)) return false;
-        return Objects.equals(matiere, profDao.matiere);
-    }
     /*
     @OneToOne
     private SubjectDao subject;

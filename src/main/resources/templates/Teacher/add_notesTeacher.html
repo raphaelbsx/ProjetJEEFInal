@@ -59,11 +59,20 @@
             <div class="col-md-12">
                 <form id="contact" th:action="@{/saveNoteTeacher}" method="post" th:object="${note}">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <input name="name" type="text" class="form-control" id="name" th:field="*{title}" placeholder="Note title" required>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <input name="name" type="text" class="form-control" th:field="*{matiere}" placeholder="Subject" required>
+                            <!--<input name="name" type="select" class="form-control">
+                                <option th:value="*{matiere}" th:field="*{matiere}"></option>
+                            </input>-->
+                        </div>
+                        <div class="col-md-4">
+                            <select th:field="*{refnote}">
+                                <option value="0">Not to share</option>
+                                <option value="1">Share</option>
+                            </select>
                         </div>
                         <div class="col-md-12">
                             <textarea name="message" rows="6" class="form-control" id="message" th:field="*{content}" placeholder="Your message..." required></textarea>
@@ -72,6 +81,7 @@
                             <fieldset>
                                 <button type="submit" id="form-submit" class="button">Add note</button>
                                 <input type="hidden" th:field="*{id}">
+                                <input type="hidden" th:field="${note.email}">
                             </fieldset>
                         </div>
                     </div>

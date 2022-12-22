@@ -25,6 +25,12 @@ public class NoteDao {
     @Column(nullable = false, length = 45)
     private String matiere;
 
+    @Column(nullable = false, length = 45)
+    private String email;
+
+    @Column(nullable = false)
+    private int refnote;
+
 
     public NoteDao(String title, String content, Date addedDate) {
         super();
@@ -33,6 +39,9 @@ public class NoteDao {
         this.setContent(content);
         this.setAddedDate(addedDate);
         this.setMatiere(getMatiere());
+
+        this.setEmail(getEmail());
+        this.setRefnote(getRefnote());
     }
 
     public NoteDao() {
@@ -81,5 +90,21 @@ public class NoteDao {
 
     public void setMatiere(String matiere) {
         this.matiere = matiere;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getRefnote() {
+        return refnote;
+    }
+
+    public void setRefnote(int refnote) {
+        this.refnote = refnote;
     }
 }

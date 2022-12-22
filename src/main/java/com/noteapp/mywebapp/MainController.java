@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -156,25 +157,6 @@ public class MainController {
     */
 
 
-    /*
-    @GetMapping("/checkEmail")
-    public String checkEmail(@RequestParam String email, Model model) {
-        if (repoStudent.findByEmail(email) != null) {
-            model.addAttribute("email", email);
-            return "/Register/emailAlreadyExists";
-        } else if (repoAdmin.findByEmail(email) != null) {
-            model.addAttribute("email", email);
-            return "/Register/emailAlreadyExists";
-        } else if (repoTeacher.findByEmail(email) != null) {
-            model.addAttribute("email", email);
-            return "/Register/emailAlreadyExists";
-        } else {
-            return "/Register/emailDoesNotExist";
-        }
-    }
-    */
-
-
     @PostMapping("/login")
     public String processLogin(@RequestParam String email, @RequestParam String password, Model model, HttpServletRequest request ) {
         if (repoStudent.findByEmailAndPassword(email, password) != null) {
@@ -228,7 +210,9 @@ public class MainController {
     // ajouter une note pour un prof
     @GetMapping("/add_notesTeacher")
     public String showAddNoteForm(Model model, HttpServletRequest request) {
-        model.addAttribute("note", new NoteDao());
+        NoteDao note = new NoteDao();
+        note.setEmail((String) request.getSession().getAttribute("mail"));
+        model.addAttribute("note", note);
         return "/Teacher/add_notesTeacher";
     }
 
@@ -373,13 +357,34 @@ public class MainController {
     }
 
 */
-
+    /*
     // Show Student/Teacher notes for the subject
     @GetMapping("/subject_notesTeacher")
-    public String showNotesFromSubject(Model model) {
-        model.addAttribute("notesListSubject", repoNote.findAll());
+    public String showNotesFromSubject(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("email") != "") {
+            model.addAttribute("notesProfSubject", repoNote.findAllByByEmail((String) session.getAttribute("mail")));
+        }
         return "/Teacher/subject_notesTeacher";
     }
+     */
+
+    /*
+    @GetMapping("/manageUsers")
+    public String ShowManageUsers(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        if (session.getAttribute("mail") != "") {
+            List<UserDao> userDaoList = service.listAll();
+            List<ProfDao> profDaoList = service.listAllProf();
+            model.addAttribute("userDaoList", userDaoList);
+            model.addAttribute("profDaoList", profDaoList);
+
+            return "/Admin/manageUsers";
+        } else {
+            return "/Login/login";
+        }
+    }
+     */
 
     //***************** Connected *****************\\
 

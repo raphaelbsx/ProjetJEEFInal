@@ -62,6 +62,7 @@
                             <th>Subject</th>
                             <th>Date</th>
                             <th>Content</th>
+                            <th>Shared</th>
                             <th>MANAGE</th>
                         </tr>
                         </thead>
@@ -73,6 +74,7 @@
                                 <td th:text="${note.matiere}"></td>
                                 <td th:text="${note.addedDate}"></td>
                                 <td style="white-space: pre;" th:text="${note.content}"></td>
+                                <td th:text="${note.refnote}"></td>
                                 <td>
                                     <a class="h4 mr-3" th:href="@{/updateNoteTeacher(noteId=${note.id})}">Edit</a>
                                     <a class="h4" th:href="@{/deleteNoteTeacher(noteId=${note.id})}">Delete</a>
