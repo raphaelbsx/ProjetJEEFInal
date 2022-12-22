@@ -42,7 +42,7 @@
             <li><a href="/home_teacher" class="external">Home</a></li>
             <li><a href="/show_notesTeacher" class="external"e>Teacher Notes</a></li>
             <li><a href="/add_notesTeacher" class="external">Add Note</a></li>
-            <li><a href="/show_notesStudentTeacher" class="external">Show Notes</a></li>
+            <li><a href="/subject_notesTeacher" class="external">Subject Notes</a></li>
             <li><a href="/static" class="external">Log Out</a></li>
         </ul>
     </nav>
@@ -51,66 +51,41 @@
 
 <section class="section why-us">
     <div class="container">
-        <div class="col-md-12">
-            <div class="section-heading">
-                <h2>Show notes</h2>
-            </div>
-        </div>
-        <div class="align-middle">
-            <section>
-                <div th:each="note:${noteslist}" style="color:white;">
-                    <div class="row">
-                        <div>
-                            <h1 th:text="${note.title}"></h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <strong th:text="${note.addedDate}"></strong>
-                        </div>
-                        <div class="col-md-4">
-                            <strong th:text="${note.matiere}"></strong>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <!-- without endline -->
-                        <!--<p th:text="${note.content}"></p>-->
-                        <!-- with endline -->
-                        <p style="white-space: pre;" th:text="${note.content}"></p>
-                    </div>
-                    <div class="container row">
-                        <a th:href="@{/updateNoteTeacher(noteId=${note.id})}" class="left-content ml-2">Edit</a>
-                        <a th:href="@{/deleteNoteTeacher(noteId=${note.id})}" class="right-content ml-2">Delete</a>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-</section>
-
-<!--
-<section class="section contact">
-    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="section-heading">
-                    <h2>Show notes</h2>
-                </div>
-            </div>
-            <div class="col-md-12" th:each="note:${noteslist}">
-                <div class="col-md-12">
-                    <p th:text="${note.title}"></p>
-                    <h3>hehe</h3>
-                    <p>blahblah</p>
-                </div>
-                <div class="col-md-12">
-                    <p th:text="${note.content}"></p>
+                <div class="section-heading"><h2>List of notes</h2></div>
+                <div>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>Title</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Content</th>
+                            <th>MANAGE</th>
+                        </tr>
+                        </thead>
+
+                        <tbody bgcolor="white">
+                        <th:block th:each="note : ${noteslist}">
+                            <tr>
+                                <td th:text="${note.title}"></td>
+                                <td th:text="${note.matiere}"></td>
+                                <td th:text="${note.addedDate}"></td>
+                                <td style="white-space: pre;" th:text="${note.content}"></td>
+                                <td>
+                                    <a class="h4 mr-3" th:href="@{/updateNoteTeacher(noteId=${note.id})}">Edit</a>
+                                    <a class="h4" th:href="@{/deleteNoteTeacher(noteId=${note.id})}">Delete</a>
+                                </td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </section>
--->
 
 <footer>
     <div class="container">

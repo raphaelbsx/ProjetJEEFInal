@@ -373,6 +373,14 @@ public class MainController {
     }
 
 */
+
+    // Show Student/Teacher notes for the subject
+    @GetMapping("/subject_notesTeacher")
+    public String showNotesFromSubject(Model model) {
+        model.addAttribute("notesListSubject", repoNote.findAll());
+        return "/Teacher/subject_notesTeacher";
+    }
+
     //***************** Connected *****************\\
 
     /*
