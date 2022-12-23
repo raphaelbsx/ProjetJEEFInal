@@ -63,9 +63,28 @@ public class AdminController {
             model.addAttribute("id", id);
             return "Admin/manageEdit";
 
+
         }
         catch (UserNotFoundException e) {
-            ra.addFlashAttribute("message", "The user hasn't been saved successfully.");
+            ra.addFlashAttribute("message", "An error as occur, the user hasn't been saved.");
+            return "redirect:/manageUsers";
+        }
+
+    }
+
+    @GetMapping("/Admin/manageEditP/{id}")
+    public String ShowManageEditP(@PathVariable("id") Integer id, Model model, RedirectAttributes ra){
+        try {
+            ProfDao prof = service.gets(id);
+            model.addAttribute("prof", prof);
+            model.addAttribute("pageTitle", "Edit Prof (ID: " + id + ")" );
+            model.addAttribute("id", id);
+            return "Admin/manageEditP";
+
+
+        }
+        catch (UserNotFoundException e) {
+            ra.addFlashAttribute("message", "An error as occur, the user hasn't been saved.");
             return "redirect:/manageUsers";
         }
 
@@ -93,6 +112,13 @@ public class AdminController {
             ra.addFlashAttribute("message","The user has been deleted successfully.");
             return "redirect:/manageUsers";
 
+    }
+
+    @GetMapping("/Admin/manageDeleteP/{id}")
+    public String profDelete(@PathVariable("id") Integer id, RedirectAttributes ra){
+        service.deleteProf(id);
+        ra.addFlashAttribute("message","The prof has been deleted successfully.");
+        return "redirect:/manageUsers";
     }
 
 

@@ -37,6 +37,15 @@ public class AdminService {
         throw new UserNotFoundException("L'utilisateur n'a pas était trouvé" + id);
     }
 
+
+    public ProfDao gets(Integer id) throws UserNotFoundException {
+        Optional<ProfDao> foundById = repoTeacher.findById(id);
+        if (foundById.isPresent()) {
+            return foundById.get();
+        }
+        throw new UserNotFoundException("L'utilisateur n'a pas était trouvé" + id);
+    }
+
     public void saveUser(UserDao user) {
 
         repoStudent.save(user);
@@ -48,6 +57,10 @@ public class AdminService {
 
     public void delete(Integer id){
         repoStudent.deleteById(id);
+        //repoTeacher.deleteById(id);
+    }
+    public void deleteProf(Integer id){
+        repoTeacher.deleteById(id);
         //repoTeacher.deleteById(id);
     }
 
