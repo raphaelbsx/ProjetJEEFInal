@@ -2,6 +2,8 @@ package com.noteapp.mywebapp;
 
 import com.noteapp.mywebapp.Admin.AdminDao;
 import com.noteapp.mywebapp.Admin.AdminRepository;
+import com.noteapp.mywebapp.Note.NoteDao;
+import com.noteapp.mywebapp.Note.NoteRepository;
 import com.noteapp.mywebapp.Prof.ProfDao;
 import com.noteapp.mywebapp.Prof.ProfRepository;
 import com.noteapp.mywebapp.Subject.SubjectDao;
@@ -16,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 @SpringBootApplication
@@ -33,6 +36,9 @@ public class MyWebAppApplication implements CommandLineRunner{
     @Autowired
     private UserRepository repoUser;
 
+    @Autowired
+    private NoteRepository repoNote;
+
 
     public static void main(String[] args) {
 
@@ -44,6 +50,7 @@ public class MyWebAppApplication implements CommandLineRunner{
     @Transactional
     public void run(String... args) throws Exception {
 
+        // Add subjects
         if (!repoSubject.existsByName("Design Patterns")) {
             ArrayList subjectlst = new ArrayList();
             subjectlst.add("Design Patterns");
@@ -62,12 +69,14 @@ public class MyWebAppApplication implements CommandLineRunner{
             }
         }
 
+        // Add default admin
         if (!repoAdmin.existsByEmail("admin.admin@gmail.com")) {
             repoAdmin.save(new AdminDao(1, "admin.admin@gmail.com",
                     "adminPassword", "adminFirstName"));
 
         }
 
+        // Add default teachers
         if (!repoProf.existsByEmail("Koro.Sensei@gmail.com")) {
             repoProf.save(new ProfDao(1, "Koro.Sensei@gmail.com", 0600000000, "Sensei", "poulpe", "Koro", "JEE"));
         }
@@ -78,14 +87,34 @@ public class MyWebAppApplication implements CommandLineRunner{
             repoProf.save(new ProfDao(3, "Albert.Einstein@gmail.com", 0700000000, "Einstein", "BigBrain1", "Albert", "Communications"));
         }
 
-
-        if (!repoUser.existsByEmail("Kylian.Mbappé@gmail.com")) {
-            repoUser.save(new UserDao(1, "Kylian.Mbappé@gmail.com", 0602020202, "Mbappé", "eleve", "Kylian", "JEE"));
+        // Add default users
+        if (!repoUser.existsByEmail("Kylian.Mbappe@gmail.com")) {
+            repoUser.save(new UserDao(1, "Kylian.Mbappe@gmail.com", 0602020202, "Mbappe", "eleve", "Kylian", "JEE"));
+        }
+        if (!repoUser.existsByEmail("Francois.Hollande@gmail.com")) {
+            repoUser.save(new UserDao(2, "Francois.Hollande@gmail.com", 0603030302, "Hollande", "eleveH", "Francois", "JEE"));
         }
 
-        if (!repoUser.existsByEmail("François.Hollande@gmail.com")) {
-            repoUser.save(new UserDao(2, "François.Hollande@gmail.com", 0603030302, "Hollande", "eleveH", "François", "JEE"));
+        // Add default notes
+        if (!repoNote.existsById(1)) {
+            repoNote.save(new NoteDao(1, "Definition of JEE","Jakarta EE (formerly Java 2 Platform, Enterprise Edition, or J2EE , then Java Platform, Enterprise Edition or Java EE), is a specification for Oracle's Java platform for enterprise applications.",  new Date(), "JEE", "Koro.Sensei@gmail.com", 1));
         }
+        if (!repoNote.existsById(2)) {
+            repoNote.save(new NoteDao(2, "Purpose of the course","Learning.",  new Date(), "JEE", "Shouta.Aizawa@gmail.com", 1));
+        }
+        if (!repoNote.existsById(3)) {
+            repoNote.save(new NoteDao(3, "My first note","This is my first note",  new Date(), "JEE", "Francois.Hollande@gmail.com", 3));
+        }
+        if (!repoNote.existsById(4)) {
+            repoNote.save(new NoteDao(4, "My first note :)","This is my first note",  new Date(), "JEE", "Kylian.Mbappe@gmail.com", 3));
+        }
+
+
+
+
+        //NoteDao(int id, String title, String content, Date addedDate, String matiere, String email, int refnote)
+
+
 
 
     }
