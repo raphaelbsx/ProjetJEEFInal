@@ -49,12 +49,17 @@
 </header>
 
 
-<section class="section why-us vh-100">
+<section class="section why-us min-vh-100">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="section-heading"><h2>Notes for the subject</h2></div>
                 <h1 style="color: white">My Shared Notes</h1>
+
+                <div th:if="${message}" class="alert alert-success text-center" >
+                    [[${message}]]
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="thead-dark">
@@ -75,7 +80,7 @@
                                 <td th:text="${noteUser.addedDate}"></td>
                                 <td style="white-space: pre;" th:text="${noteUser.content}"></td>
                                 <td>
-                                    <a class="h4 mr-3" th:href="@{/updateNoteUser(noteId=${noteUser.id})}">Unshare</a>
+                                    <a class="h4 mr-3" th:href="@{/unshare_notesUser(noteId=${noteUser.id})}">Unshare</a>
                                 </td>
                             </tr>
                         </th:block>

@@ -96,16 +96,16 @@ public class MyWebAppApplication implements CommandLineRunner{
         }
 
         // Add default notes
-        if (!repoNote.existsById(1)) {
-            repoNote.save(new NoteDao(1, "Definition of JEE","Jakarta EE (formerly Java 2 Platform, Enterprise Edition, or J2EE , then Java Platform, Enterprise Edition or Java EE), is a specification for Oracle's Java platform for enterprise applications.",  new Date(), "JEE", "Koro.Sensei@gmail.com", 1));
+        if (!repoNote.existsByEmailAndTitle("Koro.Sensei@gmail.com", "Definition of JEE")) {
+            repoNote.save(new NoteDao(1, "Definition of JEE","Jakarta EE is a specification for Oracle's Java platform for enterprise applications.",  new Date(), "JEE", "Koro.Sensei@gmail.com", 1));
         }
-        if (!repoNote.existsById(2)) {
+        if (!repoNote.existsByEmailAndTitle("Shouta.Aizawa@gmail.com", "Purpose of the course")) {
             repoNote.save(new NoteDao(2, "Purpose of the course","Learning.",  new Date(), "JEE", "Shouta.Aizawa@gmail.com", 1));
         }
-        if (!repoNote.existsById(3)) {
+        if (!repoNote.existsByEmailAndTitle("Francois.Hollande@gmail.com", "My first note")) {
             repoNote.save(new NoteDao(3, "My first note","This is my first note",  new Date(), "JEE", "Francois.Hollande@gmail.com", 3));
         }
-        if (!repoNote.existsById(4)) {
+        if (!repoNote.existsByEmailAndTitle("Kylian.Mbappe@gmail.com", "My first note :)")) {
             repoNote.save(new NoteDao(4, "My first note :)","This is my first note",  new Date(), "JEE", "Kylian.Mbappe@gmail.com", 3));
         }
     }

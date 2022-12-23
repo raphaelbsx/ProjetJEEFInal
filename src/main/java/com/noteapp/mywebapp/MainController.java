@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.Date;
@@ -77,18 +78,6 @@ public class MainController {
         }
     }
 
-
-
-    /*
-    @GetMapping("/registerProf")
-    public String showSignUpForm(Model model) {
-
-        model.addAttribute("user", new ProfDao());
-        return "registerProf"; }
-
-     */
-
-
     @PostMapping("/processRegisterStudent")
     public String processRegistrationStudent(@RequestParam String email, Model model, UserDao user) {
         if (repoStudent.findByEmail(email) != null) {
@@ -139,8 +128,6 @@ public class MainController {
             return "/Register/register_success";
         }
     }
-
-    /*public String accountExistAlready()*/
 
     /*
     @PostMapping("/processRegisterStudent")
@@ -269,7 +256,7 @@ public class MainController {
     public String saveNoteStudent(NoteDao note) {
         note.setDate(new Date());
         repoNote.save(note);
-        return "/Login/loginsuccessful";
+        return "redirect:/show_notesUser";
     }
 
 
@@ -278,7 +265,7 @@ public class MainController {
     public String saveNoteTeacher(NoteDao note) {
         note.setDate(new Date());
         repoNote.save(note);
-        return "/Login/loginsuccessfulTeacher";
+        return "redirect:/show_notesTeacher";
     }
 
     // save note for admin
@@ -314,17 +301,19 @@ public class MainController {
 
     // delete note for user
     @GetMapping("/deleteNoteUser")
-    public String deleteNoteStudent(@RequestParam int noteId) {
+    public String deleteNoteStudent(@RequestParam int noteId, RedirectAttributes ra) {
         repoNote.deleteById(noteId);
-        return "/Login/loginsuccessful";
+        ra.addFlashAttribute("message", "The note has been deleted successfully.");
+        return "redirect:/show_notesUser";
     }
 
 
     // delete note for teacher
     @GetMapping("/deleteNoteTeacher")
-    public String deleteNoteTeacher(@RequestParam int noteId) {
+    public String deleteNoteTeacher(@RequestParam int noteId, RedirectAttributes ra) {
         repoNote.deleteById(noteId);
-        return "/Login/loginsuccessfulTeacher";
+        ra.addFlashAttribute("message", "The note has been deleted successfully");
+        return "redirect:/show_notesTeacher";
     }
     /*
     // delete note for admin
@@ -417,36 +406,23 @@ public class MainController {
         return "/";
     }
 
-    //***************** Connected *****************\\
-
-    /*
-
-    @GetMapping("../index")
-    public String LogOut() { return "/index"; }
-
-    //***************** Notes *****************\\
-
-    @GetMapping("/home")
-    public String BackToHome() { return "/loginsuccessful"; }
-
-    @GetMapping("/add_notes")
-    public String ShowAddNotes(Model model) {
-       model.addAttribute("note", new NoteDao());
-        return "/notes/add_notes"; }
-
-
-    @GetMapping("/show_notes")
-    public String ShowShowNotes() {
-        return "/notes/show_notes";
+    // Unshare Teacher notes
+    @GetMapping("/unshare_notesTeacher")
+    public String unshareNoteTeacher(@RequestParam int noteId, RedirectAttributes ra) {
+        ra.addFlashAttribute("message", "The note has been unshared successfully");
+        NoteDao note = repoNote.findById(noteId).get();
+        note.setRefnote(0);
+        repoNote.save(note);
+        return "redirect:/subject_notesTeacher";
     }
 
-    @GetMapping("/teacher_notes")
-    public String ShowTeacherNotes() { return "/notes/teacher_notes"; }
-
-    @PostMapping("/save_notes")
-    public String ShowSaveNotes(NoteDao newNote) {
-        newNote.setAddedDate(new Date() );
-        repoNote.save(newNote);
-        return "/loginsuccessful";
-    }*/
+    // Unshare Student notes
+    @GetMapping("unshare_notesUser")
+    public String unshareNoteStudent(@RequestParam int noteId, RedirectAttributes ra) {
+        ra.addFlashAttribute("message", "The note has been unshared successfully");
+        NoteDao note = repoNote.findById(noteId).get();
+        note.setRefnote(2);
+        repoNote.save(note);
+        return "redirect:/subject_notesUser";
+    }
 }

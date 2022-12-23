@@ -49,11 +49,16 @@
 </header>
 
 
-<section class="section why-us vh-100">
+<section class="section why-us min-vh-100">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="section-heading"><h2>List of notes</h2></div>
+
+                <div th:if="${message}" class="alert alert-success text-center" >
+                    [[${message}]]
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="thead-dark">
