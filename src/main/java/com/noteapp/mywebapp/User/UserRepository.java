@@ -13,6 +13,8 @@ import javax.security.auth.Subject;
 @Repository
 public interface UserRepository extends JpaRepository<UserDao, Integer> {
 
+    boolean existsByEmail(String email);
+
     UserDao findByEmail(String email);
     public Long countById(Integer id);
 

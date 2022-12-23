@@ -26,6 +26,13 @@ public class AdminDao {
 
     }
 
+    public AdminDao(int adminId, String adminEmail, String adminPass, String adminFname) {
+        this.id = adminId;
+        this.email = adminEmail;
+        this.password = adminPass;
+        this.firstName = adminFname;
+    }
+
 
     public int getId() {
         return id;

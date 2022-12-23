@@ -28,6 +28,11 @@ public class SubjectDao{
 
     }
 
+    public SubjectDao(int subjectId, String subjectName){
+        this.id = subjectId;
+        this.name = subjectName;
+    }
+
 
     public int getId() {
         return id;
