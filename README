@@ -1,3 +1,18 @@
 Bienvenue sur ce projet intitulé GradSchool
 
-Blabla consignes d'exécution 
+Etapes à suivre pour pouvoir participer à ce projet :
+1er : Lancez le serveur MySQL sur votre machine avec la commande : mysql.server start
+      Connecter la base de données à votre projet
+      L'identifiant est "projet java" et le mot de passe est "root"
+      (Vous trouverez si besoin les identifiants de connexion dans le fichier "application.properties")
+
+
+2eme :Lancez le projet Spring Boot
+      Assurez vous que le projet soit bien Build
+      Vous pouvez le lancer depuis votre IDE ou depuis la ligne de commande
+      Pour le lancer depuis la ligne de commande, vous devez vous placer dans le dossier du projet et taper la commande suivante :
+      mvn spring-boot:run 
+
+N'hésitez pas à cliquer sur la vidéo de présentation du site pour avoir une idée de ce que vous pouvez faire ! 
+
+N'hésitez pas à prendre des notes ;)
