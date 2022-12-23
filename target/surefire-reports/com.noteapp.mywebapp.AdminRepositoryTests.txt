@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.noteapp.mywebapp.AdminRepositoryTests
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.051 s <<< FAILURE! - in com.noteapp.mywebapp.AdminRepositoryTests
+testAddNew  Time elapsed: 0.043 s  <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [admins.UK_47bvqemyk6vlm0w7crc3opdd4]
+	at com.noteapp.mywebapp.AdminRepositoryTests.testAddNew(AdminRepositoryTests.java:36)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at com.noteapp.mywebapp.AdminRepositoryTests.testAddNew(AdminRepositoryTests.java:36)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'test1.test@gmail.com' for key 'admins.UK_47bvqemyk6vlm0w7crc3opdd4'
+	at com.noteapp.mywebapp.AdminRepositoryTests.testAddNew(AdminRepositoryTests.java:36)
+

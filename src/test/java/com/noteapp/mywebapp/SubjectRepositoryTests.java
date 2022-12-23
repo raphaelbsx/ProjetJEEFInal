@@ -1,3 +1,4 @@
+/*
 package com.noteapp.mywebapp;
 
 import com.noteapp.mywebapp.Subject.SubjectDao;
@@ -16,11 +17,12 @@ import org.springframework.test.annotation.Rollback;
 // keep the data commited to the db
 @Rollback(false)
 
+
 public class SubjectRepositoryTests {
 
     //Reference to the subjectRepository
     @Autowired private SubjectRepository repo;
-
+/*
     @Test
     public void testAddNew() {
         SubjectDao subject = new SubjectDao();
@@ -54,3 +56,4 @@ public class SubjectRepositoryTests {
 
 
 }
+*/

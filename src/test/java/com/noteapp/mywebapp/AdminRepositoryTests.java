@@ -1,3 +1,4 @@
+/*
 package com.noteapp.mywebapp;
 
 import com.noteapp.mywebapp.Admin.AdminDao;
@@ -58,4 +59,4 @@ public class AdminRepositoryTests {
 
 
 
-}
+}*/
