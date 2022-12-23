@@ -78,18 +78,6 @@ public class MainController {
         }
     }
 
-
-
-    /*
-    @GetMapping("/registerProf")
-    public String showSignUpForm(Model model) {
-
-        model.addAttribute("user", new ProfDao());
-        return "registerProf"; }
-
-     */
-
-
     @PostMapping("/processRegisterStudent")
     public String processRegistrationStudent(@RequestParam String email, Model model, UserDao user) {
         if (repoStudent.findByEmail(email) != null) {
@@ -140,8 +128,6 @@ public class MainController {
             return "/Register/register_success";
         }
     }
-
-    /*public String accountExistAlready()*/
 
     /*
     @PostMapping("/processRegisterStudent")
