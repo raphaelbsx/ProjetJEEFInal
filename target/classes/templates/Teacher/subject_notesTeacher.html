@@ -54,6 +54,11 @@
             <div class="col-md-12">
                 <div class="section-heading"><h2>Notes for the subject</h2></div>
                 <h1 style="color: white">Teacher Notes</h1>
+
+                <div th:if="${message}" class="alert alert-success text-center" >
+                    [[${message}]]
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead class="thead-dark">
@@ -74,7 +79,7 @@
                                 <td th:text="${noteProf.addedDate}"></td>
                                 <td style="white-space: pre;" th:text="${noteProf.content}"></td>
                                 <td>
-                                    <a class="h4 mr-3" th:href="@{/updateNoteTeacher(noteId=${noteProf.id})}">Unshare</a>
+                                    <a class="h4 mr-3" th:href="@{/unshare_notesTeacher(noteId=${noteProf.id})}">Unshare</a>
                                 </td>
                             </tr>
                         </th:block>

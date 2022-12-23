@@ -9,6 +9,8 @@ import java.util.List;
 // les methodes presentes dans l'interface.
 public interface NoteRepository extends CrudRepository<NoteDao, Integer> {
 
+    boolean existsByEmailAndTitle(String email, String title);
+
     List<NoteDao> findByEmail(String email);
 
     List<NoteDao> findByEmailAndRefnote(String email, int refnote);
