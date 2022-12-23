@@ -7,22 +7,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServices {
     @Autowired
-    private UserRepository repo;
+    private UserRepository repoStudent;
 
     //Etablie un lien avec la db
     @Transactional
     public void save(UserDao user) {
-        repo.save(user);
+        repoStudent.save(user);
     }
 
     @Transactional
     public void delete(UserDao user) {
-        repo.delete(user);
+        repoStudent.delete(user);
     }
 
     @Transactional
     public UserDao findByEmail(String email) {
-        return repo.findByEmail(email);
+        return repoStudent.findByEmail(email);
     }
 
 

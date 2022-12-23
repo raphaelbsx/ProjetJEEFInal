@@ -253,18 +253,20 @@ public class MainController {
 
     // save note for student
     @PostMapping("/saveNoteUser")
-    public String saveNoteStudent(NoteDao note) {
+    public String saveNoteStudent(NoteDao note,RedirectAttributes ra) {
         note.setDate(new Date());
         repoNote.save(note);
+        ra.addFlashAttribute("message", "The note has been saved successfully.");
         return "redirect:/show_notesUser";
     }
 
 
     // save note for teacher
     @PostMapping("/saveNoteTeacher")
-    public String saveNoteTeacher(NoteDao note) {
+    public String saveNoteTeacher(NoteDao note,RedirectAttributes ra) {
         note.setDate(new Date());
         repoNote.save(note);
+        ra.addFlashAttribute("message", "The note has been saved successfully.");
         return "redirect:/show_notesTeacher";
     }
 
