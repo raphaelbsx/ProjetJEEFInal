@@ -22,7 +22,6 @@ public class UserDao{
     @Column(length =15, nullable = false,unique = true)
 
     private int phoneNumber;
-    private int numeroEtudiant;
 
 
     @Column(length =45, nullable = false, name = "last_name")
@@ -99,13 +98,6 @@ public class UserDao{
     }
 
 
-    public int getNumeroEtudiant() {
-        return numeroEtudiant;
-    }
-
-    public void setNumeroEtudiant(int numeroEtudiant) {
-        this.numeroEtudiant = numeroEtudiant;
-    }
 
     @Override
     public String toString() {
@@ -113,7 +105,6 @@ public class UserDao{
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", phoneNumber=" + phoneNumber +
-                ", numeroEtudiant=" + numeroEtudiant +
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +

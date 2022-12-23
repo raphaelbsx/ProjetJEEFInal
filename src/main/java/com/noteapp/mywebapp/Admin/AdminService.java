@@ -27,21 +27,34 @@ public class AdminService {
         return (List<ProfDao>) repoProf.findAll();
     }
 
+
+
     public UserDao get(Integer id) throws UserNotFoundException {
-        Optional<UserDao> FoundByIdU = repoUsers.findById(id);
-        if (FoundByIdU.isPresent()) {
-            return FoundByIdU.get();
+        Optional<UserDao> foundById = repoUsers.findById(id);
+        if (foundById.isPresent()) {
+            return foundById.get();
         }
         throw new UserNotFoundException("L'utilisateur n'a pas était trouvé" + id);
     }
 
-
-
-    public void saveUsers(UserDao users) {
-        repoUsers.save(users);
+    public void saveUser(UserDao user) {
+        repoUsers.save(user);
     }
     public void saveProfs(ProfDao profs) {
         repoProf.save(profs);
     }
+
+    public void delete(Integer id) throws UserNotFoundException{
+        Long count = repoProf.countById(id);
+        if (count == null || count == 0){
+            throw new UserNotFoundException("L'utilisateur n'a pas était trouvé" + id);
+        }
+        repoUsers.deleteById(id);
+    }
+
+    public void deleteProf(Integer id){
+        repoProf.deleteById(id);
+    }
+
 
 }
