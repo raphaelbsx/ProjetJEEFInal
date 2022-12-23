@@ -35,13 +35,15 @@ public class AdminService {
         throw new UserNotFoundException("L'utilisateur n'a pas était trouvé" + id);
     }
 
-
-
-    public void saveUsers(UserDao users) {
-        repoUsers.save(users);
+    public void saveUser(UserDao user) {
+        repoUsers.save(user);
     }
     public void saveProfs(ProfDao profs) {
         repoProf.save(profs);
     }
+
+
+  
+
 
 }
