@@ -40,6 +40,22 @@ public class UserDao{
     //prof 2 physique 2 ele
     //info 2 eleves
 
+    public UserDao(){
+
+    }
+
+    public UserDao(int id, String email, int phoneNumber,
+                   String lastName, String password,
+                   String firstName, String matiere) {
+        this.id = id;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.lastName = lastName;
+        this.password = password;
+        this.firstName = firstName;
+        this.matiere = matiere;
+    }
+
     public int getId() {
         return id;
     }

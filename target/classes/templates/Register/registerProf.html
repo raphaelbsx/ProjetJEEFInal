@@ -130,6 +130,8 @@
             <div class="col-md-12">
               <label style="color: white">Subject : </label>
               <select th:field="*{matiere}">
+                <option th:each="subject:${matierelist}" th:value="${subject.name}" th:text="${subject.name}"></option>
+                <!--
                 <option value="Design Patterns">Design Patterns</option>
                 <option value="JEE">JEE</option>
                 <option value="Media Technology">Media Technology</option>
@@ -141,6 +143,7 @@
                 <option value="Social Media">Social Media</option>
                 <option value="Digital Arts">Digital Arts</option>
                 <option value="Media Streaming">Media Streaming</option>
+                -->
               </select>
               <!--
               <fieldset>

@@ -93,7 +93,6 @@
                             <th>Subject</th>
                             <th>Date</th>
                             <th>Content</th>
-                            <th>MANAGE</th>
                         </tr>
                         </thead>
 
@@ -105,9 +104,6 @@
                                 <td th:text="${noteStudent.matiere}"></td>
                                 <td th:text="${noteStudent.addedDate}"></td>
                                 <td style="white-space: pre;" th:text="${noteStudent.content}"></td>
-                                <td>
-                                    <a class="h4 mr-3" th:href="@{/updateNoteTeacher(noteId=${noteStudent.id})}">Unshare</a>
-                                </td>
                             </tr>
                         </th:block>
                         </tbody>

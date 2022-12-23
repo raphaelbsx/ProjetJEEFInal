@@ -7,6 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 // les methodes presentes dans l'interface.
 public interface ProfRepository extends CrudRepository<ProfDao, Integer> {
 
+    boolean existsByEmail(String email);
+
     ProfDao findByEmail(String email);
 
     Object findByEmailAndPassword(String email, String password);
