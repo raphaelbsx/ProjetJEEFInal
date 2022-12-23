@@ -16,10 +16,10 @@ public class UserDao{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false,unique = true, length = 45)
+    @Column(nullable = false, length = 45, unique = true)
     private String email;
 
-    @Column(length =15, nullable = false,unique = true)
+    @Column(length =15, nullable = false, unique = true)
 
     private int phoneNumber;
 
@@ -39,6 +39,22 @@ public class UserDao{
     //prof math 2 eleves
     //prof 2 physique 2 ele
     //info 2 eleves
+
+    public UserDao(){
+
+    }
+
+    public UserDao(int id, String email, int phoneNumber,
+                   String lastName, String password,
+                   String firstName, String matiere) {
+        this.id = id;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.lastName = lastName;
+        this.password = password;
+        this.firstName = firstName;
+        this.matiere = matiere;
+    }
 
     public int getId() {
         return id;

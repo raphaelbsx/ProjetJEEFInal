@@ -8,6 +8,7 @@ import com.noteapp.mywebapp.Note.NoteDao;
 import com.noteapp.mywebapp.Note.NoteRepository;
 import com.noteapp.mywebapp.Prof.ProfDao;
 import com.noteapp.mywebapp.Prof.ProfRepository;
+import com.noteapp.mywebapp.Subject.SubjectRepository;
 import com.noteapp.mywebapp.User.UserDao;
 import com.noteapp.mywebapp.User.UserRepository;
 import jakarta.servlet.http.HttpSession;
@@ -40,6 +41,9 @@ public class MainController {
     @Autowired
     private NoteRepository repoNote;
 
+    @Autowired
+    private SubjectRepository repoSubject;
+
     @GetMapping("/")
     public String ShowHomePage() {
         return "index";
@@ -60,9 +64,11 @@ public class MainController {
     public String showSignUpFormEleve(@RequestParam String role, Model model) {
         if (role.equals("prof")) {
             model.addAttribute("prof", new ProfDao());
+            model.addAttribute("matierelist", repoSubject.findAll());
             return "/Register/registerProf";
         } else if (role.equals("eleve")) {
             model.addAttribute("user", new UserDao());
+            model.addAttribute("matierelist", repoSubject.findAll());
             // model.addAttribute("matierelist", repoTeacher.fin)
             return "/Register/registerEleve";
         } else {

@@ -1,5 +1,6 @@
 package com.noteapp.mywebapp.Admin;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.noteapp.mywebapp.Note.NoteDao;
 import com.noteapp.mywebapp.Note.NoteRepository;
 import com.noteapp.mywebapp.Prof.ProfDao;
@@ -24,7 +25,6 @@ import java.util.Optional;
 
 @Controller
 public class AdminController {
-
 
     @Autowired
     private UserRepository repoStudent;
@@ -60,18 +60,38 @@ public class AdminController {
             UserDao user = service.get(id);
             model.addAttribute("user", user);
             model.addAttribute("pageTitle", "Edit User (ID: " + id + ")" );
+            model.addAttribute("id", id);
             return "Admin/manageEdit";
+
 
         }
         catch (UserNotFoundException e) {
-            ra.addFlashAttribute("message", "The user hasn't been saved successfully.");
+            ra.addFlashAttribute("message", "An error as occur, the user hasn't been saved.");
+            return "redirect:/manageUsers";
+        }
+
+    }
+
+    @GetMapping("/Admin/manageEditP/{id}")
+    public String ShowManageEditP(@PathVariable("id") Integer id, Model model, RedirectAttributes ra){
+        try {
+            ProfDao prof = service.gets(id);
+            model.addAttribute("prof", prof);
+            model.addAttribute("pageTitle", "Edit Prof (ID: " + id + ")" );
+            model.addAttribute("id", id);
+            return "Admin/manageEditP";
+
+
+        }
+        catch (UserNotFoundException e) {
+            ra.addFlashAttribute("message", "An error as occur, the user hasn't been saved.");
             return "redirect:/manageUsers";
         }
 
     }
 
     @PostMapping("/saveEditUsers")
-    public String saveEditUsers(UserDao user, RedirectAttributes ra){
+    public String saveEditUsers( UserDao user, RedirectAttributes ra){
         service.saveUser(user);
         ra.addFlashAttribute("message", "The user has been saved successfully.");
         return "redirect:/manageUsers";
@@ -88,14 +108,16 @@ public class AdminController {
 
     @GetMapping("/Admin/manageDelete/{id}")
     public String userDelete(@PathVariable("id") Integer id, RedirectAttributes ra){
-        try {
             service.delete(id);
+            ra.addFlashAttribute("message","The user has been deleted successfully.");
+            return "redirect:/manageUsers";
 
-        }
-        catch (UserNotFoundException e) {
-            ra.addFlashAttribute("message", e.getMessage());
+    }
 
-        }
+    @GetMapping("/Admin/manageDeleteP/{id}")
+    public String profDelete(@PathVariable("id") Integer id, RedirectAttributes ra){
+        service.deleteProf(id);
+        ra.addFlashAttribute("message","The prof has been deleted successfully.");
         return "redirect:/manageUsers";
     }
 

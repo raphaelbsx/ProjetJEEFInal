@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 // les methodes presentes dans l'interface.
 public interface SubjectRepository extends CrudRepository<SubjectDao, Integer> {
 
+    boolean existsByName(String name);
 }

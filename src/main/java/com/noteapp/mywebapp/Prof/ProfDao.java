@@ -44,6 +44,18 @@ public class ProfDao {
 
     }
 
+    public ProfDao(int id, String email, int phoneNumber,
+                   String lastName, String password,
+                   String firstName, String matiere) {
+        this.id = id;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.lastName = lastName;
+        this.password = password;
+        this.firstName = firstName;
+        this.matiere = matiere;
+    }
+
     public int getId() {
         return id;
     }
