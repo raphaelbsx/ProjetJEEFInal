@@ -108,15 +108,6 @@ public class MyWebAppApplication implements CommandLineRunner{
         if (!repoNote.existsById(4)) {
             repoNote.save(new NoteDao(4, "My first note :)","This is my first note",  new Date(), "JEE", "Kylian.Mbappe@gmail.com", 3));
         }
-
-
-
-
-        //NoteDao(int id, String title, String content, Date addedDate, String matiere, String email, int refnote)
-
-
-
-
     }
 
 
