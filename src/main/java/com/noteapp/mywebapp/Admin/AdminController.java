@@ -1,5 +1,6 @@
 package com.noteapp.mywebapp.Admin;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.noteapp.mywebapp.Note.NoteDao;
 import com.noteapp.mywebapp.Note.NoteRepository;
 import com.noteapp.mywebapp.Prof.ProfDao;
@@ -24,7 +25,6 @@ import java.util.Optional;
 
 @Controller
 public class AdminController {
-
 
     @Autowired
     private UserRepository repoStudent;
@@ -60,6 +60,7 @@ public class AdminController {
             UserDao user = service.get(id);
             model.addAttribute("user", user);
             model.addAttribute("pageTitle", "Edit User (ID: " + id + ")" );
+            model.addAttribute("id", id);
             return "Admin/manageEdit";
 
         }
@@ -71,7 +72,7 @@ public class AdminController {
     }
 
     @PostMapping("/saveEditUsers")
-    public String saveEditUsers(UserDao user, RedirectAttributes ra){
+    public String saveEditUsers( UserDao user, RedirectAttributes ra){
         service.saveUser(user);
         ra.addFlashAttribute("message", "The user has been saved successfully.");
         return "redirect:/manageUsers";
@@ -88,15 +89,10 @@ public class AdminController {
 
     @GetMapping("/Admin/manageDelete/{id}")
     public String userDelete(@PathVariable("id") Integer id, RedirectAttributes ra){
-        try {
             service.delete(id);
+            ra.addFlashAttribute("message","The user has been deleted successfully.");
+            return "redirect:/manageUsers";
 
-        }
-        catch (UserNotFoundException e) {
-            ra.addFlashAttribute("message", e.getMessage());
-
-        }
-        return "redirect:/manageUsers";
     }
 
 

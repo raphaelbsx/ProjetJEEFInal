@@ -15,22 +15,22 @@ import java.util.Optional;
 @Service
 public class AdminService {
     @Autowired
-    private UserRepository repoUsers;
+    private UserRepository repoStudent;
     @Autowired
-    private ProfRepository repoProf;
+    private ProfRepository repoTeacher;
 
     public List<UserDao> listAll() {
-        return (List<UserDao>) repoUsers.findAll();
+        return (List<UserDao>) repoStudent.findAll();
     }
 
     public List<ProfDao> listAllProf() {
-        return (List<ProfDao>) repoProf.findAll();
+        return (List<ProfDao>) repoTeacher.findAll();
     }
 
 
 
     public UserDao get(Integer id) throws UserNotFoundException {
-        Optional<UserDao> foundById = repoUsers.findById(id);
+        Optional<UserDao> foundById = repoStudent.findById(id);
         if (foundById.isPresent()) {
             return foundById.get();
         }
@@ -38,23 +38,17 @@ public class AdminService {
     }
 
     public void saveUser(UserDao user) {
-        repoUsers.save(user);
+
+        repoStudent.save(user);
+
     }
     public void saveProfs(ProfDao profs) {
-        repoProf.save(profs);
+        repoTeacher.save(profs);
     }
 
-    public void delete(Integer id) throws UserNotFoundException{
-        Long count = repoProf.countById(id);
-        if (count == null || count == 0){
-            throw new UserNotFoundException("L'utilisateur n'a pas était trouvé" + id);
-        }
-        repoUsers.deleteById(id);
+    public void delete(Integer id){
+        repoStudent.deleteById(id);
+        //repoTeacher.deleteById(id);
     }
-
-    public void deleteProf(Integer id){
-        repoProf.deleteById(id);
-    }
-
 
 }

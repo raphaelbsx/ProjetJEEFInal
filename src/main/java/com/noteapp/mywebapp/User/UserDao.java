@@ -16,10 +16,10 @@ public class UserDao{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false,unique = true, length = 45)
+    @Column(nullable = false, length = 45, unique = true)
     private String email;
 
-    @Column(length =15, nullable = false,unique = true)
+    @Column(length =15, nullable = false, unique = true)
 
     private int phoneNumber;
 
