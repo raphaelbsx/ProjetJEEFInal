@@ -62,6 +62,20 @@ public class AdminController {
         return null;
     }
 
+    @PostMapping("/saveEditUsers")
+    public String saveEditUsers(UserDao users){
+        service.saveUsers(users);
+    return "redirect:/manageEdit";
+    }
+
+
+    @PostMapping("/saveEditProf")
+    public String saveEditUsers(ProfDao profs){
+        service.saveProfs(profs);
+        return "redirect:/manageEdit";
+    }
+
+
 
 
 
