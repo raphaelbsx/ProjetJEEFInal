@@ -28,13 +28,14 @@ public class AdminService {
     }
 
     public UserDao get(Integer id) throws UserNotFoundException {
-        Optional<UserDao> FoundById = repoUsers.findById(id);
-        if (FoundById.isPresent()) {
-            return FoundById.get();
-
+        Optional<UserDao> FoundByIdU = repoUsers.findById(id);
+        if (FoundByIdU.isPresent()) {
+            return FoundByIdU.get();
         }
         throw new UserNotFoundException("L'utilisateur n'a pas était trouvé" + id);
     }
+
+
 
     public void saveUsers(UserDao users) {
         repoUsers.save(users);

@@ -10,7 +10,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
-    <title>Student Registration - Sign Up</title>
+    <title>[[${pageTitle}]]</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -31,7 +31,7 @@
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
-            <li><a href="/">Home</a></li>
+            <li><a href="/manageUsers">Manage Users</a></li>
         </ul>
     </nav>
 </header>
@@ -41,11 +41,11 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="section-heading">
-                    <h2>Student Registration</h2>
+                    <h2>[[${pageTitle}]]</h2>
                 </div>
             </div>
             <div class="col-md-8">
-                <form action="/processRegisterStudent" method="post" th:object="${user}">
+                <form action="@{/saveEditUsers}" method="post" th:object="${user}">
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <fieldset>
@@ -79,7 +79,7 @@
                             </fieldset>
                         </div>
                         <div class="col-3">
-                            <button type="submit">Sign Up</button>
+                            <button type="submit">Save</button>
                         </div>
                     </div>
                 </form>

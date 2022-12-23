@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 import java.util.List;
@@ -51,28 +52,34 @@ public class AdminController {
     }
 
     @GetMapping("/Admin/manageEdit/{id}")
-    public String ShowManageEdit(@PathVariable("id") Integer id, Model model){
+    public String ShowManageEdit(@PathVariable("id") Integer id, Model model, RedirectAttributes ra){
         try {
             UserDao user = service.get(id);
             model.addAttribute("user", user);
-        }
-        catch (UserNotFoundException e) {
+            model.addAttribute("pageTitle", "Edit User (ID: " + id + ")" );
+            return "Admin/manageEdit";
 
         }
-        return null;
+        catch (UserNotFoundException e) {
+            ra.addFlashAttribute("message", "The user has been saved successfully.");
+            return "redirect:/manageUsers";
+        }
+
     }
 
     @PostMapping("/saveEditUsers")
-    public String saveEditUsers(UserDao users){
-        service.saveUsers(users);
-    return "redirect:/manageEdit";
+    public String saveEditUsers(UserDao user, RedirectAttributes ra){
+        service.saveUsers(user);
+        ra.addFlashAttribute("message", "The user has been saved successfully.");
+    return "redirect:/Admin/manageUsers";
     }
 
 
     @PostMapping("/saveEditProf")
-    public String saveEditUsers(ProfDao profs){
+    public String saveEditUsers(ProfDao profs, RedirectAttributes ra){
         service.saveProfs(profs);
-        return "redirect:/manageEdit";
+        ra.addFlashAttribute("message", "The user has been saved successfully.");
+        return "redirect:/manageUsers";
     }
 
 

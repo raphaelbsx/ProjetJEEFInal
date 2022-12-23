@@ -72,8 +72,8 @@
                                 <td> [[${{(user.password)}}]]</td>
                                 <td> [[${{(user.matiere)}}]]</td>
                                 <td>
-                                    <a class="h4 mr-3" th:href="@{'/Admin/manageEdit' + ${user.id}}"> Edit </a>
-                                    <a class="h4" th:href="@{'/Admin/manageDelete' + ${user.id}}"> Delete </a>
+                                    <a class="h4 mr-3" th:href="@{'/Admin/manageEdit/' + ${user.id}}"> Edit </a>
+                                    <a class="h4" th:href="@{'/Admin/manageDelete/' + ${user.id}}"> Delete </a>
                                 </td>
 
                             </tr>
@@ -125,8 +125,8 @@
                                 <td> [[${{(prof.password)}}]]</td>
                                 <td> [[${{(prof.matiere)}}]]</td>
                                 <td>
-                                    <a class="h4 mr-3" th:href="@{'/Admin/manageEdit' + ${prof.id}}"> Edit </a>
-                                    <a class="h4" th:href="@{'/Admin/manageDelete' + ${prof.id}}"> Delete </a>
+                                    <a class="h4 mr-3" th:href="@{'/Admin/manageEdit/' + ${prof.id}}"> Edit </a>
+                                    <a class="h4" th:href="@{'/Admin/manageDelete/' + ${prof.id}}"> Delete </a>
                                 </td>
 
                             </tr>
