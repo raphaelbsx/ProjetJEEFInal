@@ -44,6 +44,16 @@ public class NoteDao {
         this.setRefnote(getRefnote());
     }
 
+    public NoteDao(int id, String title, String content, Date addedDate, String matiere, String email, int refnote) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.addedDate = addedDate;
+        this.matiere = matiere;
+        this.email = email;
+        this.refnote = refnote;
+    }
+
     public NoteDao() {
         super();
     }
