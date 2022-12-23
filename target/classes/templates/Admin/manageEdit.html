@@ -33,7 +33,7 @@
     <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
     <nav id="menu" class="main-nav" role="navigation">
         <ul class="main-menu">
-            <li><a href="/manageUsers">Manage Users</a></li>
+            <li><a href="@{/manageUsers}">Manage Users</a></li>
         </ul>
     </nav>
 </header>
@@ -82,6 +82,7 @@
                         </div>
                         <div class="col-3">
                             <button type="submit">Save</button>
+                            <button type="button" onclick="cancelEdit()">Cancel</button>
                         </div>
                     </div>
                 </form>
@@ -89,6 +90,13 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    function cancelEdit(){
+        window.location ="[[@{/manageUsers}]]";
+    }
+
+</script>
 
 <footer>
     <div class="container">

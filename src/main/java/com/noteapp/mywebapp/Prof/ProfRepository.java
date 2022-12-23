@@ -10,4 +10,6 @@ public interface ProfRepository extends CrudRepository<ProfDao, Integer> {
     ProfDao findByEmail(String email);
 
     Object findByEmailAndPassword(String email, String password);
+
+    public Long countById(Integer id);
 }

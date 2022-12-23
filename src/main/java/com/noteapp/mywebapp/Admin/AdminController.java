@@ -74,7 +74,7 @@ public class AdminController {
     public String saveEditUsers(UserDao user, RedirectAttributes ra){
         service.saveUser(user);
         ra.addFlashAttribute("message", "The user has been saved successfully.");
-        return "/Admin/manageUsers";
+        return "redirect:/manageUsers";
 
     }
 
@@ -85,6 +85,20 @@ public class AdminController {
         ra.addFlashAttribute("message", "The user has been saved successfully.");
         return "redirect:/manageUsers";
     }
+
+    @GetMapping("/Admin/manageDelete/{id}")
+    public String userDelete(@PathVariable("id") Integer id, RedirectAttributes ra){
+        try {
+            service.delete(id);
+
+        }
+        catch (UserNotFoundException e) {
+            ra.addFlashAttribute("message", e.getMessage());
+
+        }
+        return "redirect:/manageUsers";
+    }
+
 
 
 }
