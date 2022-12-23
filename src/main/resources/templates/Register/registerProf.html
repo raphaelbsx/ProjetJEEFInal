@@ -128,9 +128,25 @@
             </div>
 
             <div class="col-md-12">
+              <label style="color: white">Subject : </label>
+              <select th:field="*{matiere}">
+                <option value="Design Patterns">Design Patterns</option>
+                <option value="JEE">JEE</option>
+                <option value="Media Technology">Media Technology</option>
+                <option value="Communications">Communications</option>
+                <option value="Business Ethics">Business Ethics</option>
+                <option value="Photography">Photograpy</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Learn HTML CSS">Learn HTML CSS</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Digital Arts">Digital Arts</option>
+                <option value="Media Streaming">Media Streaming</option>
+              </select>
+              <!--
               <fieldset>
-                <input type="text" class="form-control" placeholder="Subject" th:field="*{matiere}" required>
+                  <input type="text" class="form-control" placeholder="Subject" th:field="*{matiere}" required>
               </fieldset>
+              -->
             </div>
             <div class="col-md-12">
               <fieldset>
